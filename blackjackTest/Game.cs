@@ -9,9 +9,10 @@ namespace blackjackTest
     class Game 
     {
         Random random = new Random();
-        int totalCount = 0;
-        int[] cardValueArr = new int[10];
-        int[] compCardValueArr = new int[10];
+        int playerTotalValue = 0;
+        int computerTotalValue = 0;
+        int[] PlayerCardValueArray = new int[10];
+        int[] ComputerCardValueArray = new int[10];
         int hitCount = 1;
         
         public int GetCardValue()
@@ -23,79 +24,86 @@ namespace blackjackTest
             }
             if(cardValue == 1)
             {
-                Console.WriteLine("Press 1 if");
+                cardValue = 11;
             }
             return cardValue;
         }
 
         public void InitialPlay()
         {
-            cardValueArr[0] = GetCardValue();
-            cardValueArr[1] = GetCardValue();
+            PlayerCardValueArray[0] = GetCardValue();
+            PlayerCardValueArray[1] = GetCardValue();
 
-            compCardValueArr[0] = GetCardValue();
-            compCardValueArr[1] = GetCardValue();
+            ComputerCardValueArray[0] = GetCardValue();
+            ComputerCardValueArray[1] = GetCardValue();
             Console.Clear();
-            Console.WriteLine("Player: " + cardValueArr[0] + " - " + cardValueArr[1]);
-            totalCount = cardValueArr[0] + cardValueArr[1];
-            Console.WriteLine("Total: " + totalCount);
+            Console.WriteLine("Player: " + PlayerCardValueArray[0] + " - " + PlayerCardValueArray[1]);
+            playerTotalValue = PlayerCardValueArray[0] + PlayerCardValueArray[1];
+            Console.WriteLine("Total: " + playerTotalValue);
         }
 
         public void Hit()
         {
             hitCount++;
-            cardValueArr[hitCount] = GetCardValue();
-            totalCount += cardValueArr[hitCount];
+            PlayerCardValueArray[hitCount] = GetCardValue();
+            playerTotalValue += PlayerCardValueArray[hitCount];
             for (int i = 0; i <= hitCount; i++)
             {
-                Console.Write(cardValueArr[i] + "  ");
+                Console.Write(PlayerCardValueArray[i] + "  ");
             }
-            Console.WriteLine("Total: " + totalCount);
-            if(totalCount >= 21)
+            Console.WriteLine("Total: " + playerTotalValue);
+            if(playerTotalValue > 21 && PlayerCardValueArray.Contains(1))
             {
-                Show();
+                playerTotalValue -= 10;
             }
         }
 
         public void Show()
         {
             int compHitCount = 1;
-            int compTotal = compCardValueArr[0] + compCardValueArr[1];
-            while(compTotal < 16)
+            computerTotalValue = ComputerCardValueArray[0] + ComputerCardValueArray[1];
+            while(computerTotalValue < 16)
             {
                 compHitCount++;
-                compCardValueArr[compHitCount] = GetCardValue();
-                compTotal += compCardValueArr[compHitCount];
+                ComputerCardValueArray[compHitCount] = GetCardValue();
+                computerTotalValue += ComputerCardValueArray[compHitCount];
+
+                if (computerTotalValue > 21 && ComputerCardValueArray.Contains(1))
+                {
+                    computerTotalValue -= 10;
+                }
             }
+            
+            
             Console.Write("Player: ");
             for (int i = 0; i <= hitCount; i++)
             {
-                Console.Write(cardValueArr[i] + " - ");
+                Console.Write(PlayerCardValueArray[i] + " - ");
             }
-            Console.WriteLine("Player total: " + totalCount);
+            Console.WriteLine("Player total: " + playerTotalValue);
             Console.Write("\nComputer: ");
             for (int i = 0; i <= compHitCount; i++)
             {
-                Console.Write(compCardValueArr[i] + " - ");
+                Console.Write(ComputerCardValueArray[i] + " - ");
             }
-            Console.WriteLine("Computer total: " + compTotal);
+            Console.WriteLine("Computer total: " + computerTotalValue);
 
 
-            if (compTotal > 21 && totalCount < 21)
+            if (computerTotalValue > 21 && playerTotalValue < 21)
             {
                 Console.WriteLine("Player wins!");
             }
-            else if(totalCount > 21 && compTotal < 21)
+            else if(playerTotalValue > 21 && computerTotalValue < 21)
             {
                 Console.WriteLine("Computer wins!");
             }
-            else if(totalCount < 21 && compTotal < 21)
+            else if(playerTotalValue < 21 && computerTotalValue < 21)
             {
-                if(totalCount > compTotal)
+                if(playerTotalValue > computerTotalValue)
                 {
                     Console.WriteLine("Player wins!");
                 }
-                if(compTotal > totalCount)
+                if(computerTotalValue > playerTotalValue)
                 {
                     Console.WriteLine("Computer wins!");
                 }
@@ -106,5 +114,6 @@ namespace blackjackTest
             }
             Console.ReadKey();
         }
+        
     }
 }
