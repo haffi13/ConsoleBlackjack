@@ -10,14 +10,8 @@ namespace blackjackTest
     {
         static void Main(string[] args)
         {
-            Decide decide = new Decide();
-            decide.Decision();
-            //Game game = new Game();
-            //game.InitialPlay();
-            //decide.Decision();
-            
-
-
+            Menu m = new Menu();
+            m.MainMenu();
         }
     }
 }

@@ -25,7 +25,8 @@ namespace blackjackTest
                         running = true;
                         break;
                     case 2:
-                        game.Show();
+                        game.GetValuesForComputer();
+                        game.FindWinner();
                         running = false;
                         break;
                     default:
@@ -34,9 +35,6 @@ namespace blackjackTest
 
                 }
             }
-            
-
         }
-
     }
 }

@@ -8,6 +8,8 @@ namespace blackjackTest
 {
     class Game 
     {
+        BlackjackTable table = new BlackjackTable();
+
         Random random = new Random();
         int playerTotalValue = 0;
         int computerTotalValue = 0;
@@ -37,9 +39,11 @@ namespace blackjackTest
             ComputerCardValueArray[0] = GetCardValue();
             ComputerCardValueArray[1] = GetCardValue();
             Console.Clear();
-            Console.WriteLine("Player: " + PlayerCardValueArray[0] + " - " + PlayerCardValueArray[1]);
+            table.AddPlayerCard(PlayerCardValueArray[0]);
+            table.AddPlayerCard(PlayerCardValueArray[1]);
+            //Console.WriteLine("Player: " + PlayerCardValueArray[0] + " - " + PlayerCardValueArray[1]);
             playerTotalValue = PlayerCardValueArray[0] + PlayerCardValueArray[1];
-            Console.WriteLine("Total: " + playerTotalValue);
+            //Console.WriteLine("Total: " + playerTotalValue);
         }
 
         public void Hit()
@@ -58,7 +62,7 @@ namespace blackjackTest
             }
         }
 
-        public void Show()
+        public void GetValuesForComputer()
         {
             int compHitCount = 1;
             computerTotalValue = ComputerCardValueArray[0] + ComputerCardValueArray[1];
@@ -73,47 +77,35 @@ namespace blackjackTest
                     computerTotalValue -= 10;
                 }
             }
-            
-            
-            Console.Write("Player: ");
-            for (int i = 0; i <= hitCount; i++)
-            {
-                Console.Write(PlayerCardValueArray[i] + " - ");
-            }
-            Console.WriteLine("Player total: " + playerTotalValue);
-            Console.Write("\nComputer: ");
-            for (int i = 0; i <= compHitCount; i++)
-            {
-                Console.Write(ComputerCardValueArray[i] + " - ");
-            }
-            Console.WriteLine("Computer total: " + computerTotalValue);
+        }
 
-
-            if (computerTotalValue > 21 && playerTotalValue < 21)
+        public void FindWinner()
+        {
+            if(playerTotalValue > 21 && computerTotalValue <= 21)
             {
-                Console.WriteLine("Player wins!");
+                //computerWins
+                Console.WriteLine("computerWins");
             }
-            else if(playerTotalValue > 21 && computerTotalValue < 21)
+            else if(computerTotalValue > 21 && playerTotalValue <= 21)
             {
-                Console.WriteLine("Computer wins!");
+                //playerWins
+                Console.WriteLine("playerWins");
             }
-            else if(playerTotalValue < 21 && computerTotalValue < 21)
+            else if(playerTotalValue < computerTotalValue)
             {
-                if(playerTotalValue > computerTotalValue)
-                {
-                    Console.WriteLine("Player wins!");
-                }
-                if(computerTotalValue > playerTotalValue)
-                {
-                    Console.WriteLine("Computer wins!");
-                }
+                //computerWins
+                Console.WriteLine("computerWins");
+            }
+            else if(computerTotalValue < playerTotalValue)
+            {
+                //playerWins
+                Console.WriteLine("playerWins");
             }
             else
             {
-                Console.WriteLine("DRAW!");
-            }
-            Console.ReadKey();
+                Console.WriteLine("draw");
+                //draw
+            }   
         }
-        
     }
 }

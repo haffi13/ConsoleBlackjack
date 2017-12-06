@@ -56,12 +56,12 @@ namespace blackjackTest
                     break;
             }
 
-            cardTemplate =    @".------." +
-                              @"|" + sCardType + ".--. |" +
-                              @"| (\/) |" +
-                              @"| :\/: |" +
-                              @"| '--'" + sCardType + "|" +
-                              @"`------'";
+            cardTemplate =    @"  .------." + "\n" +
+                              @"  |" + sCardType + ".--. |" + "\n" +
+                              @"  | (\/) |" + "\n" +
+                              @"  | :\/: |" + "\n" +
+                              @"  | '--'" + sCardType + "|" + "\n" +
+                              @"  `------'" + "\n";
             return cardTemplate;
         }
     }

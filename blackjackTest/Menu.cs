@@ -8,7 +8,6 @@ namespace blackjackTest
 {
     class Menu
     {
-        Game game = new Game();
         Decide decide = new Decide();
         public void MainMenu()
         {
