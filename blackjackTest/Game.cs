@@ -39,9 +39,7 @@ namespace blackjackTest
             ComputerCardValueArray[0] = GetCardValue();
             ComputerCardValueArray[1] = GetCardValue();
             Console.Clear();
-            table.AddPlayerCard(PlayerCardValueArray[0]);
-            table.AddPlayerCard(PlayerCardValueArray[1]);
-            //Console.WriteLine("Player: " + PlayerCardValueArray[0] + " - " + PlayerCardValueArray[1]);
+            table.InitialPlay(PlayerCardValueArray[0], PlayerCardValueArray[1]);
             playerTotalValue = PlayerCardValueArray[0] + PlayerCardValueArray[1];
             //Console.WriteLine("Total: " + playerTotalValue);
         }
@@ -49,7 +47,20 @@ namespace blackjackTest
         public void Hit()
         {
             hitCount++;
+        
             PlayerCardValueArray[hitCount] = GetCardValue();
+            switch (hitCount)
+            {
+                case 2:
+                    table.AddPlayerCard(PlayerCardValueArray[hitCount] ,2); //2 = 3spil, 0based index
+                    break;
+                case 3:
+                    table.AddPlayerCard(PlayerCardValueArray[hitCount], 3);// 4spil
+                    break;
+                case 4:
+                    table.AddPlayerCard(PlayerCardValueArray[hitCount], 4);//5spil
+                    break;
+            }
             playerTotalValue += PlayerCardValueArray[hitCount];
             for (int i = 0; i <= hitCount; i++)
             {
