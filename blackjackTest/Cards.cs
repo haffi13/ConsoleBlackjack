@@ -11,13 +11,28 @@ namespace blackjackTest
         //string cardTemplate;
         //string playerCards = string.Empty;
         //string computerCards = string.Empty;
-        string card1 = string.Empty, card2 = string.Empty, card3 = string.Empty, card4 = string.Empty, card5 = string.Empty, card6 = string.Empty, card7 = string.Empty, card8 = string.Empty, card9 = string.Empty, card10 = string.Empty;
+        string pCard1 = string.Empty, pCard2 = string.Empty, pCard3 = string.Empty, pCard4 = string.Empty, pCard5 = string.Empty, pCard6 = string.Empty, pCard7 = string.Empty, pCard8 = string.Empty, pCard9 = string.Empty, pCard10 = string.Empty;
+        //could later refactor this into an array....
+        string cCard1 = string.Empty, cCard2 = string.Empty, cCard3 = string.Empty, cCard4 = string.Empty, cCard5 = string.Empty, cCard6 = string.Empty, cCard7 = string.Empty, cCard8 = string.Empty, cCard9 = string.Empty, cCard10 = string.Empty;
+        //same for cCard...
 
-        public string InitialPlay(int card1Val, int Card2Val)
+        public string InitialPlay(int card1Val, int Card2Val, int playerOrComputer) // 1 = player || 2 = computer
         {
-            
-            card1 = GetCard(card1Val);
-            card2 = GetCard(Card2Val);
+            string card1 = string.Empty, card2 = string.Empty;
+            if(playerOrComputer == 1)
+            {
+                pCard1 = GetCard(card1Val);
+                pCard2 = GetCard(Card2Val);
+                card1 = pCard1;
+                card2 = pCard2;
+            }   
+            else if(playerOrComputer == 2)
+            {
+                cCard1 = GetCard(card1Val);
+                cCard2 = GetCard(Card2Val);
+                card1 = cCard1;
+                card2 = cCard2;
+            }
 
             string cardtemplate2 = @"  .------." + @"  .------." + "\n" +
                                    @"  |" + card1 + ".--. |" + @"  |" + card2 + ".--. |" + "\n" +
@@ -30,20 +45,53 @@ namespace blackjackTest
 
         }
 
-        public string ThirdCard(int card3Val)
+        public string ThirdCard(int card3Val, int playerOrComputer) // 1 = player || 2 = computer
         {
-            card3 = GetCard(card3Val);
-            string cardtemplate2 = @"  .------." + @"  .------." + @"  .------." + "\n" +
+            string card1 = string.Empty, card2 = string.Empty, card3 = string.Empty;
+            if(playerOrComputer == 1)
+            {
+                pCard3 = GetCard(card3Val);
+                card1 = pCard1;
+                card2 = pCard2;
+                card3 = pCard3;
+
+            }
+            else if(playerOrComputer == 2)
+            {
+                cCard3 = GetCard(card3Val);
+                card1 = cCard1;
+                card2 = cCard2;
+                card3 = cCard3;
+            }
+            string cardtemplate3 = @"  .------." + @"  .------." + @"  .------." + "\n" +
                                    @"  |" + card1 + ".--. |" + @"  |" + card2 + ".--. |" + @"  |" + card3 + ".--. |" + "\n" +
                                    @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
                                    @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
-                                   @"  | '--'" + card1 + "|" + @"  | '--'" + card2 + "|" + @"  | '--'" + card3 + "|" + "\n" +
+                                   @"  | '--'" + card1+ "|" + @"  | '--'" + card2 + "|" + @"  | '--'" + card3 + "|" + "\n" +
                                    @"  `------'" + @"  `------'" + @"  `------'" + "\n";
-            return cardtemplate2;
+            return cardtemplate3;
         }
 
-        public string FourthCard(int card4Val)
+        public string FourthCard(int card4Val, int playerOrComputer) // 1 = player || 2 = computer
         {
+            string card1 = string.Empty, card2 = string.Empty, card3 = string.Empty, card4 = string.Empty;
+            if(playerOrComputer == 1)
+            {
+                pCard4 = GetCard(card4Val);
+                card1 = pCard1;
+                card2 = pCard2;
+                card3 = pCard3;
+                card4 = pCard4;
+
+            }
+            else if(playerOrComputer == 2)
+            {
+                cCard4 = GetCard(card4Val);
+                card1 = cCard1;
+                card2 = cCard2;
+                card3 = cCard3;
+                card4 = cCard4;
+            }
             string cardtemplate4 = @"  .------." + @"  .------." + @"  .------." + @"  .------." + "\n" +
                                    @"  |" + card1 + ".--. |" + @"  |" + card2 + ".--. |" + @"  |" + card3 + ".--. |" + @"  |" + card4 + ".--. |" + "\n" +
                                    @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
@@ -53,8 +101,27 @@ namespace blackjackTest
             return cardtemplate4;
         }
 
-        public string FifthCard(int card5Val)
+        public string FifthCard(int card5Val, int playerOrComputer) // 1 = player || 2 = computer
         {
+            string card1 = string.Empty, card2 = string.Empty, card3 = string.Empty, card4 = string.Empty, card5 = string.Empty;
+            if (playerOrComputer == 1)
+            {
+                pCard5 = GetCard(card5Val);
+                card1 = pCard1;
+                card2 = pCard2;
+                card3 = pCard3;
+                card4 = pCard4;
+                card5 = pCard5;
+            }
+            else if(playerOrComputer == 2)
+            {
+                cCard5 = GetCard(card5Val);
+                card1 = cCard1;
+                card2 = cCard2;
+                card3 = cCard3;
+                card4 = cCard4;
+                card5 = cCard5;
+            }
             string cardtemplate5 = @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + "\n" +
                        @"  |" + card1 + ".--. |" + @"  |" + card2 + ".--. |" + @"  |" + card3 + ".--. |" + @"  |" + card4 + ".--. |" + @"  |" + card5 + ".--. |" + "\n" +
                        @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
@@ -64,7 +131,39 @@ namespace blackjackTest
             return cardtemplate5;
         }
 
-        public void SixthCard()
+        public string SixthCard(int card6Val, int playerOrComputer) // 1 = player || 2 = computer
+        {
+            string card1 = string.Empty, card2 = string.Empty, card3 = string.Empty, card4 = string.Empty, card5 = string.Empty, card6 = string.Empty;
+            if (playerOrComputer == 1)
+            {
+                pCard6 = GetCard(card6Val);
+                card1 = pCard1;
+                card2 = pCard2;
+                card3 = pCard3;
+                card4 = pCard4;
+                card5 = pCard5;
+                card6 = pCard6;
+            }
+            else if (playerOrComputer == 2)
+            {
+                cCard6 = GetCard(card6Val);
+                card1 = cCard1;
+                card2 = cCard2;
+                card3 = cCard3;
+                card4 = cCard4;
+                card5 = cCard5;
+                card6 = cCard6;
+            }
+            pCard5 = GetCard(card6Val);
+            string cardtemplate6 = @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + "\n" +
+                       @"  |" + card1 + ".--. |" + @"  |" + card2 + ".--. |" + @"  |" + card3 + ".--. |" + @"  |" + card4 + ".--. |" + @"  |" + card5 + ".--. |" + @"  |" + card6 + ".--. |" + "\n" +
+                       @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
+                       @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
+                       @"  | '--'" + card1 + "|" + @"  | '--'" + card2 + "|" + @"  | '--'" + card3 + "|" + @"  | '--'" + card4 + "|" + @"  | '--'" + card5 + "|" + @"  | '--'" + card6 + "|" + "\n" +
+                       @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + "\n";
+            return cardtemplate6;
+        }
+        public void SeventhCard() //samt string, fuk a redline!
         {
 
         }

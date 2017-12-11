@@ -22,6 +22,7 @@ namespace blackjackTest
                 {
                     case 1:
                         game.Hit();
+                        //game.GetCardValue();
                         running = true;
                         break;
                     case 2:

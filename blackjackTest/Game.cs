@@ -17,14 +17,21 @@ namespace blackjackTest
         int[] ComputerCardValueArray = new int[10];
         int hitCount = 1;
         
-        public int GetCardValue()
+        public int GetCardType()
         {
-            int cardValue = random.Next(1, 14);
-            if(cardValue > 10)
+            int cardType = random.Next(1, 14);
+           
+            return cardType;
+        }
+
+        public int ConvertCardValue(int cardType)
+        {
+            int cardValue = cardType;
+            if (cardValue > 10)
             {
                 cardValue = 10;
             }
-            if(cardValue == 1)
+            if (cardValue == 1)
             {
                 cardValue = 11;
             }
@@ -33,61 +40,80 @@ namespace blackjackTest
 
         public void InitialPlay()
         {
-            PlayerCardValueArray[0] = GetCardValue();
-            PlayerCardValueArray[1] = GetCardValue();
+            int playerCard1Value, playerCard2Value, playerCard1Type, playerCard2Type;
+            int computerCard1Value, computerCard2Value, computerCard1Type, computerCard2Type;
+            playerCard1Type = GetCardType();
+            playerCard2Type = GetCardType();
+            computerCard1Type = GetCardType();
+            computerCard2Type = GetCardType();
+            playerCard1Value = ConvertCardValue(playerCard1Type);
+            playerCard2Value = ConvertCardValue(playerCard2Type);
+            computerCard1Value = ConvertCardValue(computerCard1Type);
+            computerCard2Value = ConvertCardValue(computerCard2Type);
+            PlayerCardValueArray[0] = playerCard1Value;
+            PlayerCardValueArray[1] = playerCard2Value;
+            ComputerCardValueArray[0] = computerCard1Value;
+            ComputerCardValueArray[1] = computerCard2Value;
 
-            ComputerCardValueArray[0] = GetCardValue();
-            ComputerCardValueArray[1] = GetCardValue();
             Console.Clear();
-            table.InitialPlay(PlayerCardValueArray[0], PlayerCardValueArray[1]);
+            table.PlayerInitialPlay(PlayerCardValueArray[0], PlayerCardValueArray[1]);
             playerTotalValue = PlayerCardValueArray[0] + PlayerCardValueArray[1];
-            //Console.WriteLine("Total: " + playerTotalValue);
+
+            table.ComputerInitialPlay(ComputerCardValueArray[0], ComputerCardValueArray[1]);
+            Console.WriteLine("Total: " + playerTotalValue);
         }
+
+        
 
         public void Hit()
         {
             hitCount++;
-        
-            PlayerCardValueArray[hitCount] = GetCardValue();
-            switch (hitCount)
-            {
-                case 2:
-                    table.AddPlayerCard(PlayerCardValueArray[hitCount] ,2); //2 = 3spil, 0based index
-                    break;
-                case 3:
-                    table.AddPlayerCard(PlayerCardValueArray[hitCount], 3);// 4spil
-                    break;
-                case 4:
-                    table.AddPlayerCard(PlayerCardValueArray[hitCount], 4);//5spil
-                    break;
-            }
+            int currentType = GetCardType();
+            int currentValue = ConvertCardValue(currentType);
+
+            PlayerCardValueArray[hitCount] = currentValue;
+            table.AddCard(PlayerCardValueArray[hitCount], hitCount);
+           
             playerTotalValue += PlayerCardValueArray[hitCount];
-            for (int i = 0; i <= hitCount; i++)
-            {
-                Console.Write(PlayerCardValueArray[i] + "  ");
-            }
-            Console.WriteLine("Total: " + playerTotalValue);
-            if(playerTotalValue > 21 && PlayerCardValueArray.Contains(1))
+
+            if (playerTotalValue > 21 && PlayerCardValueArray.Contains(1))
             {
                 playerTotalValue -= 10;
             }
+
+            /*for (int i = 0; i <= hitCount; i++)
+            {
+                Console.Write(PlayerCardValueArray[i] + "  ");
+            }
+            Console.WriteLine("Total: " + playerTotalValue);*/
+            
         }
 
         public void GetValuesForComputer()
         {
             int compHitCount = 1;
             computerTotalValue = ComputerCardValueArray[0] + ComputerCardValueArray[1];
-            while(computerTotalValue < 16)
+            //computer InitialPlay begins
+
+
+            //computer InitialPlay ends
+            //þarf að græja initial play fyrir computer...eða sleppa og láta þetta runna bara frá byrjun
+            //jafnvel betra þannig
+            while(computerTotalValue < 17)
             {
                 compHitCount++;
-                ComputerCardValueArray[compHitCount] = GetCardValue();
+                int cardType = GetCardType();
+                int cardValue = ConvertCardValue(cardType);
+                ComputerCardValueArray[compHitCount] = cardValue;  //sama problem of í initial play
                 computerTotalValue += ComputerCardValueArray[compHitCount];
+                table.AddComputerCards(cardType, compHitCount);
 
                 if (computerTotalValue > 21 && ComputerCardValueArray.Contains(1))
                 {
                     computerTotalValue -= 10;
                 }
             }
+            table.DisplayAllCards();
         }
 
         public void FindWinner()

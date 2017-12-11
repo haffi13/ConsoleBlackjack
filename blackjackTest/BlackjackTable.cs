@@ -11,32 +11,70 @@ namespace blackjackTest
         Cards cards = new Cards();
 
         string playerCardString = string.Empty;
+        string computerCardString = string.Empty;
+        string displayString = string.Empty;
 
-        public void AddPlayerCard(int cardValue, int numOfCards)
+        public void AddCard(int cardType, int numOfCards)
         {
             Console.Clear();
             //playerCardString += cards.GetCard(cardValue);
             switch (numOfCards)
             {
                 case 2:
-                    playerCardString = cards.ThirdCard(cardValue);
+                    playerCardString = cards.ThirdCard(cardType, 1);
                     break;
                 case 3:
-                    playerCardString = cards.FourthCard(cardValue);
+                    playerCardString = cards.FourthCard(cardType, 1);
                     break;
                 case 4:
-                    playerCardString = cards.FifthCard(cardValue);
+                    playerCardString = cards.FifthCard(cardType, 1);
+                    break;
+                case 5:
+                    playerCardString = cards.SixthCard(cardType, 1);
                     break;
 
             }
             Console.WriteLine(playerCardString);
         }
 
-        public void InitialPlay(int card1Value, int card2Value)
+        public void AddComputerCards(int cardType, int numOfCards)
+        {
+            switch (numOfCards)
+            {
+                case 2:
+                    computerCardString = cards.ThirdCard(cardType, 2);
+                    break;
+                case 3:
+                    computerCardString = cards.FourthCard(cardType, 2);
+                    break;
+                case 4:
+                    computerCardString = cards.FifthCard(cardType, 2);
+                    break;
+                case 5:
+                    computerCardString = cards.SixthCard(cardType, 2);
+                    break;
+
+            }
+        }
+
+        public void DisplayAllCards()
         {
             Console.Clear();
-            playerCardString = cards.InitialPlay(card1Value, card2Value);
+            displayString = playerCardString + "\n\n\n\n\n" + computerCardString;
+            Console.WriteLine(displayString);
+            Console.ReadKey();
+        }
+        
+
+        public void PlayerInitialPlay(int card1Type, int card2Type)
+        {
+            Console.Clear();
+            playerCardString = cards.InitialPlay(card1Type, card2Type, 1);
             Console.WriteLine(playerCardString);
+        }
+        public void ComputerInitialPlay(int card1Type, int card2Type)
+        {
+            computerCardString = cards.InitialPlay(card1Type, card2Type, 2);
         }
 
     }
