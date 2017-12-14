@@ -28,12 +28,14 @@ namespace blackjackTest
                     case 2:
                         game.GetValuesForComputer();
                         game.FindWinner();
+                        Console.ReadKey();
+                        game.ResetTable();
                         running = false;
+                        Decision();
                         break;
                     default:
                         Console.WriteLine("Selection is not valid");
                         break;
-
                 }
             }
         }

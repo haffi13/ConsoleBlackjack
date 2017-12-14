@@ -10,9 +10,9 @@ namespace blackjackTest
     {
         Cards cards = new Cards();
 
-        string playerCardString = string.Empty;
-        string computerCardString = string.Empty;
-        string displayString = string.Empty;
+        public string playerCardString = string.Empty;
+        public string computerCardString = string.Empty;
+        public string displayString = string.Empty;
 
         public void AddCard(int cardType, int numOfCards)
         {
@@ -21,7 +21,7 @@ namespace blackjackTest
             switch (numOfCards)
             {
                 case 2:
-                    playerCardString = cards.ThirdCard(cardType, 1);
+                    playerCardString = cards.ThirdCard(cardType, 1, numOfCards);
                     break;
                 case 3:
                     playerCardString = cards.FourthCard(cardType, 1);
@@ -57,15 +57,15 @@ namespace blackjackTest
             }
         }
 
-        public void DisplayAllCards()
+        public void DisplayAllCards(int playerTotal, int computerTotal)
         {
+
             Console.Clear();
-            displayString = playerCardString + "\n\n\n\n\n" + computerCardString;
+            displayString = playerCardString + "\nPlayer: " + playerTotal + "\n\n\n\n\n" + computerCardString + "\nComputer: " + computerTotal;
             Console.WriteLine(displayString);
             Console.ReadKey();
         }
         
-
         public void PlayerInitialPlay(int card1Type, int card2Type)
         {
             Console.Clear();
@@ -77,5 +77,9 @@ namespace blackjackTest
             computerCardString = cards.InitialPlay(card1Type, card2Type, 2);
         }
 
+        public void ClearLocalCards()
+        {
+            cards.ClearCardStrings();
+        }
     }
 }

@@ -11,68 +11,101 @@ namespace blackjackTest
         //string cardTemplate;
         //string playerCards = string.Empty;
         //string computerCards = string.Empty;
-        string pCard1 = string.Empty, pCard2 = string.Empty, pCard3 = string.Empty, pCard4 = string.Empty, pCard5 = string.Empty, pCard6 = string.Empty, pCard7 = string.Empty, pCard8 = string.Empty, pCard9 = string.Empty, pCard10 = string.Empty;
+        string card1 = string.Empty, card2 = string.Empty, card3 = string.Empty, card4 = string.Empty, card5 = string.Empty, card6 = string.Empty, card7 = string.Empty, card8 = string.Empty, card9 = string.Empty, card10 = string.Empty;
         //could later refactor this into an array....
         string cCard1 = string.Empty, cCard2 = string.Empty, cCard3 = string.Empty, cCard4 = string.Empty, cCard5 = string.Empty, cCard6 = string.Empty, cCard7 = string.Empty, cCard8 = string.Empty, cCard9 = string.Empty, cCard10 = string.Empty;
         //same for cCard...
 
+
+
+        string[] playerCards;
+        string[] computerCards;
+
+
+        public void ClearCardStrings() //only clears up to 6, program only allows 6 cards at the moment!
+        {
+            /* pCard1 = string.Empty;
+             pCard2 = string.Empty;
+             pCard3 = string.Empty;
+             pCard4 = string.Empty;
+             pCard5 = string.Empty;
+             pCard6 = string.Empty;*/
+
+            cCard1 = string.Empty;
+            cCard2 = string.Empty;
+            cCard3 = string.Empty;
+            cCard4 = string.Empty;
+            cCard5 = string.Empty;
+            cCard6 = string.Empty;
+        }
         public string InitialPlay(int card1Val, int Card2Val, int playerOrComputer) // 1 = player || 2 = computer
         {
             string card1 = string.Empty, card2 = string.Empty;
-            if(playerOrComputer == 1)
+            switch (playerOrComputer)
             {
-                pCard1 = GetCard(card1Val);
-                pCard2 = GetCard(Card2Val);
-                card1 = pCard1;
-                card2 = pCard2;
-            }   
-            else if(playerOrComputer == 2)
-            {
-                cCard1 = GetCard(card1Val);
-                cCard2 = GetCard(Card2Val);
-                card1 = cCard1;
-                card2 = cCard2;
+                case 1:
+                    playerCards[0] = GetCard(card1Val);
+                    playerCards[1] = GetCard(Card2Val);
+                    card1 = playerCards[0];
+                    card2 = playerCards[1];
+                    break;
+                case 2:
+                    computerCards[0] = GetCard(card1Val);
+                    computerCards[1] = GetCard(Card2Val);
+                    card1 = computerCards[0];
+                    card2 = computerCards[1];
+                    break;
             }
 
-            string cardtemplate2 = @"  .------." + @"  .------." + "\n" +
+            string cardtemplate = @"  .------." + @"  .------." + "\n" +
                                    @"  |" + card1 + ".--. |" + @"  |" + card2 + ".--. |" + "\n" +
                                    @"  | (\/) |" + @"  | (\/) |" + "\n" +
                                    @"  | :\/: |" + @"  | :\/: |" + "\n" +
                                    @"  | '--'" + card1 + "|" + @"  | '--'" + card2 + "|" + "\n" +
                                    @"  `------'" + @"  `------'" + "\n";
 
-            return cardtemplate2;
+            return cardtemplate;
 
         }
 
-        public string ThirdCard(int card3Val, int playerOrComputer) // 1 = player || 2 = computer
+        public void ThirdCard(int card3Val, int playerOrComputer, int numberOfCards) // 1 = player || 2 = computer
         {
-            string card1 = string.Empty, card2 = string.Empty, card3 = string.Empty;
-            if(playerOrComputer == 1)
+            for (int i = 0; i < numberOfCards; i++)
             {
-                pCard3 = GetCard(card3Val);
-                card1 = pCard1;
-                card2 = pCard2;
-                card3 = pCard3;
+                switch (playerOrComputer)
+                {
+                    case 1:
 
+                        playerCards[numberOfCards] = GetCard(card3Val);
+                        GetThirdCard()
+                        card1 = playerCards[0];
+                        card2 = playerCards[1];
+                        card3 = playerCards[2];
+                        break;
+                    case 2:
+                        /*computerCards[0] = GetCard(card1Val);
+                        computerCards[1] = GetCard(Card2Val);
+                        card1 = computerCards[0];
+                        card2 = computerCards[1];*/
+                        break;
+                }
             }
-            else if(playerOrComputer == 2)
-            {
-                cCard3 = GetCard(card3Val);
-                card1 = cCard1;
-                card2 = cCard2;
-                card3 = cCard3;
-            }
+        }
+        public string GetThirdCard(string[] cards) {
+            string card1 = string.Empty, card2 = string.Empty, card3 = string.Empty;
+            
             string cardtemplate3 = @"  .------." + @"  .------." + @"  .------." + "\n" +
-                                   @"  |" + card1 + ".--. |" + @"  |" + card2 + ".--. |" + @"  |" + card3 + ".--. |" + "\n" +
+                                   @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + card3 + ".--. |" + "\n" +
                                    @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
                                    @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
-                                   @"  | '--'" + card1+ "|" + @"  | '--'" + card2 + "|" + @"  | '--'" + card3 + "|" + "\n" +
+                                   @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + card3 + "|" + "\n" +
                                    @"  `------'" + @"  `------'" + @"  `------'" + "\n";
             return cardtemplate3;
         }
 
-        public string FourthCard(int card4Val, int playerOrComputer) // 1 = player || 2 = computer
+    
+
+        /*public string FourthCard(int card4Val, int playerOrComputer) // 1 = player || 2 = computer
         {
             string card1 = string.Empty, card2 = string.Empty, card3 = string.Empty, card4 = string.Empty;
             if(playerOrComputer == 1)
@@ -167,7 +200,7 @@ namespace blackjackTest
         {
 
         }
-
+        */
         public string GetCard(int iCardType)
         {
             string sCardType = string.Empty;
@@ -217,7 +250,7 @@ namespace blackjackTest
             return sCardType;
         }
     }
-}
+
 
 
 /*string cardtemplate2 = @"  .------." + @"  .------." + "\n" +
@@ -236,3 +269,5 @@ namespace blackjackTest
                               @"  | :\/: |" + "\n" +
                               @"  | '--'" + sCardType + "|" + "\n" +
                               @"  `------'" + "\n";*/
+                              
+    */*/*//*
