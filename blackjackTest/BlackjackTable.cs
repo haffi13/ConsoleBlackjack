@@ -19,10 +19,10 @@ namespace blackjackTest
             switch (playerOrComputer)
             {
                 case 1:
-                    playerCardString = cards.ThirdCard(cardType, playerOrComputer, numOfCards);
+                    playerCardString = cards.GetCardString(cardType, playerOrComputer, numOfCards);
                     break;
                 case 2:
-                    computerCardString = cards.ThirdCard(cardType, playerOrComputer, numOfCards);
+                    computerCardString = cards.GetCardString(cardType, playerOrComputer, numOfCards);
                     break;
             }
             Console.Clear();

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System;   
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,10 +65,7 @@ namespace blackjackTest
 
             //table.ComputerInitialPlay(ComputerCardValueArray[0], ComputerCardValueArray[1]);
             table.ComputerInitialPlay(computerCard1Type, computerCard2Type);
-
         }
-
-
 
         public void Hit(int playerOrComputer)
         {
@@ -105,31 +102,8 @@ namespace blackjackTest
                     table.DisplayAllCards(playerTotalValue, computerTotalValue);
                     break;
             }
-                        
         }
-
-        /*public void GetValuesForComputer()
-        {
-            int compHitCount = 1;
-            computerTotalValue = ComputerCardValueArray[0] + ComputerCardValueArray[1];
-            
-            while(computerTotalValue < 17)
-            {
-                compHitCount++;
-                int cardType = GetCardType();
-                int cardValue = ConvertCardValue(cardType);
-                ComputerCardValueArray[compHitCount] = cardValue; 
-                computerTotalValue += ComputerCardValueArray[compHitCount];
-                table.AddComputerCards(cardType, compHitCount);
-
-                if (computerTotalValue > 21 && ComputerCardValueArray.Contains(1)) //breyta úr value í type fyrir rétt conversion...
-                {
-                    computerTotalValue -= 10;
-                }
-            }
-            table.DisplayAllCards(playerTotalValue, computerTotalValue);
-        }*/
-
+        
         public void FindWinner()
         {
             if(playerTotalValue > 21 && computerTotalValue <= 21) //afhverju telur gosi 11 ??
