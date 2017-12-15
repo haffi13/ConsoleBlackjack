@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace blackjackTest
+namespace ConsoleBlackjack
 {
     class Menu
     {
-        Decide decide = new Decide();
+        Controller controller = new Controller();
         public void MainMenu()
         {
             bool running = true;
@@ -23,7 +23,7 @@ namespace blackjackTest
         }
         public void StartGame()
         {
-            decide.Decision();
+            controller.Decision();
         }
         public int GetUserInput()
         {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace blackjackTest
+namespace ConsoleBlackjack
 {
-    class Decide
+    class Controller
     {
         Game game = new Game();
         public void Decision()

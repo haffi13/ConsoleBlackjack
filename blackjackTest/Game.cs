@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace blackjackTest
+namespace ConsoleBlackjack
 {
     class Game 
     {
@@ -13,8 +13,11 @@ namespace blackjackTest
         Random random = new Random();
         int playerTotalValue = 0;
         int computerTotalValue = 0;
+
         int[] PlayerCardValueArray = new int[10];
+        int[] PlayerCardType = new int[10];
         int[] ComputerCardValueArray = new int[10];
+        int[] ComputerCardType = new int[10];
         int hitCount = 1;
 
         public int GetCardType()
@@ -45,8 +48,12 @@ namespace blackjackTest
             int computerCard1Value, computerCard2Value, computerCard1Type, computerCard2Type;
             playerCard1Type = GetCardType();
             playerCard2Type = GetCardType();
+            PlayerCardType[0] = playerCard1Type;
+            PlayerCardType[1] = playerCard2Type;
             computerCard1Type = GetCardType();
             computerCard2Type = GetCardType();
+            ComputerCardType[0] = computerCard1Type;
+            ComputerCardType[1] = computerCard2Type;
             playerCard1Value = ConvertCardValue(playerCard1Type);
             playerCard2Value = ConvertCardValue(playerCard2Type);
             computerCard1Value = ConvertCardValue(computerCard1Type);
@@ -74,12 +81,18 @@ namespace blackjackTest
                 case 1:
                     hitCount++;
                     int currentType = GetCardType();
+                    PlayerCardType[hitCount] = currentType;
                     int currentValue = ConvertCardValue(currentType);
                     PlayerCardValueArray[hitCount] = currentValue;
                     playerTotalValue += currentValue;
                     table.AddCard(currentType, playerOrComputer, hitCount);
 
-                    if (playerTotalValue > 21 && PlayerCardValueArray.Contains(1))
+                    //checka frekar type en value...hægt að breyta seinna eftir að ég geng úr skugga
+                    //um að values séu að convertast rétt
+
+                    
+
+                    if (playerTotalValue > 21 && PlayerCardValueArray.Contains(11))
                     {
                         playerTotalValue -= 10;
                     }
@@ -90,10 +103,11 @@ namespace blackjackTest
                     {
                         compHitCount++;
                         int cardType = GetCardType();
+                        ComputerCardType[compHitCount] = cardType;
                         int cardValue = ConvertCardValue(cardType);
                         ComputerCardValueArray[compHitCount] = cardValue;
                         computerTotalValue += cardValue;
-                        table.AddCard(cardType,compHitCount, playerOrComputer);
+                        table.AddCard(cardType, compHitCount, playerOrComputer);
                         if (computerTotalValue > 21 && ComputerCardValueArray.Contains(1)) //þarf að vera 11!!!! breyta úr value í type fyrir rétt conversion...
                         {
                             computerTotalValue -= 10;
