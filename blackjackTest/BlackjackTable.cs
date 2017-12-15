@@ -14,26 +14,18 @@ namespace blackjackTest
         public string computerCardString = string.Empty;
         public string displayString = string.Empty;
 
-        public void AddCard(int cardType, int numOfCards)
+        public void AddCard(int cardType, int playerOrComputer, int numOfCards) // 1=player||2=computer 
         {
-            Console.Clear();
-            //playerCardString += cards.GetCard(cardValue);
-            switch (numOfCards)
+            switch (playerOrComputer)
             {
+                case 1:
+                    playerCardString = cards.ThirdCard(cardType, playerOrComputer, numOfCards);
+                    break;
                 case 2:
-                    playerCardString = cards.ThirdCard(cardType, 1, numOfCards);
+                    computerCardString = cards.ThirdCard(cardType, playerOrComputer, numOfCards);
                     break;
-                case 3:
-                    playerCardString = cards.FourthCard(cardType, 1);
-                    break;
-                case 4:
-                    playerCardString = cards.FifthCard(cardType, 1);
-                    break;
-                case 5:
-                    playerCardString = cards.SixthCard(cardType, 1);
-                    break;
-
             }
+            Console.Clear();
             Console.WriteLine(playerCardString);
         }
 
@@ -42,16 +34,16 @@ namespace blackjackTest
             switch (numOfCards)
             {
                 case 2:
-                    computerCardString = cards.ThirdCard(cardType, 2);
+                    //computerCardString = cards.ThirdCard(cardType, 2);
                     break;
                 case 3:
-                    computerCardString = cards.FourthCard(cardType, 2);
+                    //computerCardString = cards.FourthCard(cardType, 2);
                     break;
                 case 4:
-                    computerCardString = cards.FifthCard(cardType, 2);
+                    //computerCardString = cards.FifthCard(cardType, 2);
                     break;
                 case 5:
-                    computerCardString = cards.SixthCard(cardType, 2);
+                    //computerCardString = cards.SixthCard(cardType, 2);
                     break;
 
             }
@@ -68,6 +60,7 @@ namespace blackjackTest
         
         public void PlayerInitialPlay(int card1Type, int card2Type)
         {
+            cards.PopulateCardArrays();
             Console.Clear();
             playerCardString = cards.InitialPlay(card1Type, card2Type, 1);
             Console.WriteLine(playerCardString);
@@ -79,7 +72,7 @@ namespace blackjackTest
 
         public void ClearLocalCards()
         {
-            cards.ClearCardStrings();
+            //cards.ClearCardStrings();
         }
     }
 }

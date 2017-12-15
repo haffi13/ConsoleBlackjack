@@ -8,36 +8,19 @@ namespace blackjackTest
 {
     public class Cards
     {
-        //string cardTemplate;
-        //string playerCards = string.Empty;
-        //string computerCards = string.Empty;
-        string card1 = string.Empty, card2 = string.Empty, card3 = string.Empty, card4 = string.Empty, card5 = string.Empty, card6 = string.Empty, card7 = string.Empty, card8 = string.Empty, card9 = string.Empty, card10 = string.Empty;
-        //could later refactor this into an array....
-        string cCard1 = string.Empty, cCard2 = string.Empty, cCard3 = string.Empty, cCard4 = string.Empty, cCard5 = string.Empty, cCard6 = string.Empty, cCard7 = string.Empty, cCard8 = string.Empty, cCard9 = string.Empty, cCard10 = string.Empty;
-        //same for cCard...
 
+        string[] playerCards = new string[10];
+        string[] computerCards = new string[10];
 
-
-        string[] playerCards;
-        string[] computerCards;
-
-
-        public void ClearCardStrings() //only clears up to 6, program only allows 6 cards at the moment!
+        public void PopulateCardArrays()
         {
-            /* pCard1 = string.Empty;
-             pCard2 = string.Empty;
-             pCard3 = string.Empty;
-             pCard4 = string.Empty;
-             pCard5 = string.Empty;
-             pCard6 = string.Empty;*/
-
-            cCard1 = string.Empty;
-            cCard2 = string.Empty;
-            cCard3 = string.Empty;
-            cCard4 = string.Empty;
-            cCard5 = string.Empty;
-            cCard6 = string.Empty;
+            for (int i = 0; i < 10; i++)
+            {
+                playerCards[i] = string.Empty;
+                computerCards[i] = string.Empty;
+            }
         }
+
         public string InitialPlay(int card1Val, int Card2Val, int playerOrComputer) // 1 = player || 2 = computer
         {
             string card1 = string.Empty, card2 = string.Empty;
@@ -68,42 +51,89 @@ namespace blackjackTest
 
         }
 
-        public void ThirdCard(int card3Val, int playerOrComputer, int numberOfCards) // 1 = player || 2 = computer
+        public string ThirdCard(int card3Val, int playerOrComputer, int numberOfCards) // 1 = player || 2 = computer
         {
-            for (int i = 0; i < numberOfCards; i++)
+            string ret = string.Empty;
+            switch (playerOrComputer)
             {
-                switch (playerOrComputer)
-                {
-                    case 1:
-
-                        playerCards[numberOfCards] = GetCard(card3Val);
-                        GetThirdCard()
-                        card1 = playerCards[0];
-                        card2 = playerCards[1];
-                        card3 = playerCards[2];
-                        break;
-                    case 2:
-                        /*computerCards[0] = GetCard(card1Val);
-                        computerCards[1] = GetCard(Card2Val);
-                        card1 = computerCards[0];
-                        card2 = computerCards[1];*/
-                        break;
-                }
+                case 1:
+                    playerCards[numberOfCards] = GetCard(card3Val);
+                    ret = GetTable(playerCards, numberOfCards);
+                    break;
+                case 2:
+                    computerCards[numberOfCards] = GetCard(card3Val);
+                    ret = GetTable(computerCards, numberOfCards);
+                    break;
             }
+            return ret;
+
         }
-        public string GetThirdCard(string[] cards) {
-            string card1 = string.Empty, card2 = string.Empty, card3 = string.Empty;
-            
+       /* public string GetThirdCard(string[] cards)
+        {
+
             string cardtemplate3 = @"  .------." + @"  .------." + @"  .------." + "\n" +
-                                   @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + card3 + ".--. |" + "\n" +
+                                   @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + cards[2] + ".--. |" + "\n" +
                                    @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
                                    @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
-                                   @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + card3 + "|" + "\n" +
+                                   @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + cards[2] + "|" + "\n" +
                                    @"  `------'" + @"  `------'" + @"  `------'" + "\n";
             return cardtemplate3;
+        }*/
+
+        public string GetTable(string[] cards, int numberOfCards)
+        {
+            string tableTemplate = string.Empty;
+            
+            switch (numberOfCards)
+            {
+                case 1:
+                    tableTemplate = @"  .------." + @"  .------." + "\n" +
+                                   @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + "\n" +
+                                   @"  | (\/) |" + @"  | (\/) |" + "\n" +
+                                   @"  | :\/: |" + @"  | :\/: |" + "\n" +
+                                   @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + "\n" +
+                                   @"  `------'" + @"  `------'" + "\n";
+                    break;
+                case 2:
+                    tableTemplate = @"  .------." + @"  .------." + @"  .------." + "\n" +
+                                   @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + cards[2] + ".--. |" + "\n" +
+                                   @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
+                                   @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
+                                   @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + cards[2] + "|" + "\n" +
+                                   @"  `------'" + @"  `------'" + @"  `------'" + "\n";
+                    break;
+                case 3:
+                    tableTemplate = @"  .------." + @"  .------." + @"  .------." + @"  .------." + "\n" +
+                                   @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + cards[2] + ".--. |" + @"  |" + cards[3] + ".--. |" + "\n" +
+                                   @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
+                                   @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
+                                   @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + cards[2] + "|" + @"  | '--'" + cards[3] + "|" + "\n" +
+                                   @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + "\n";
+                    break;
+                case 4:
+                    tableTemplate = @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + "\n" +
+                       @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + cards[2] + ".--. |" + @"  |" + cards[3] + ".--. |" + @"  |" + cards[4] + ".--. |" + "\n" +
+                       @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
+                       @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
+                       @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + cards[2] + "|" + @"  | '--'" + cards[3] + "|" + @"  | '--'" + cards[4] + "|" + "\n" +
+                       @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + "\n";
+                    break;
+                case 5:
+                    tableTemplate = @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + "\n" +
+                       @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + cards[2] + ".--. |" + @"  |" + cards[3] + ".--. |" + @"  |" + cards[4] + ".--. |" + @"  |" + cards[5] + ".--. |" + "\n" +
+                       @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
+                       @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
+                       @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + cards[2] + "|" + @"  | '--'" + cards[3] + "|" + @"  | '--'" + cards[4] + "|" + @"  | '--'" + cards[5] + "|" + "\n" +
+                       @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + "\n";
+                    break;
+                case 6:
+
+                    break;
+            }
+            return tableTemplate;
         }
 
-    
+
 
         /*public string FourthCard(int card4Val, int playerOrComputer) // 1 = player || 2 = computer
         {
@@ -250,6 +280,7 @@ namespace blackjackTest
             return sCardType;
         }
     }
+}
 
 
 
@@ -270,4 +301,4 @@ namespace blackjackTest
                               @"  | '--'" + sCardType + "|" + "\n" +
                               @"  `------'" + "\n";*/
                               
-    */*/*//*
+   

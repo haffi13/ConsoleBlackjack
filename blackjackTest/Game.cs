@@ -16,6 +16,17 @@ namespace blackjackTest
         int[] PlayerCardValueArray = new int[10];
         int[] ComputerCardValueArray = new int[10];
         int hitCount = 1;
+
+        public void ClearCardValues() //might not be neccisery
+        {
+            computerTotalValue = 0;
+            playerTotalValue = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                PlayerCardValueArray[i] = 0;
+                ComputerCardValueArray[i] = 0; 
+            }
+        }
         
         public int GetCardType()
         {
@@ -40,6 +51,7 @@ namespace blackjackTest
 
         public void InitialPlay()
         {
+            
             int playerCard1Value, playerCard2Value, playerCard1Type, playerCard2Type;
             int computerCard1Value, computerCard2Value, computerCard1Type, computerCard2Type;
             playerCard1Type = GetCardType();
@@ -52,36 +64,62 @@ namespace blackjackTest
             computerCard2Value = ConvertCardValue(computerCard2Type);
             PlayerCardValueArray[0] = playerCard1Value;
             PlayerCardValueArray[1] = playerCard2Value;
+            playerTotalValue = PlayerCardValueArray[0] + PlayerCardValueArray[1];
             ComputerCardValueArray[0] = computerCard1Value;
             ComputerCardValueArray[1] = computerCard2Value;
+            computerTotalValue = ComputerCardValueArray[0] + ComputerCardValueArray[1];
 
             Console.Clear();
-            table.PlayerInitialPlay(PlayerCardValueArray[0], PlayerCardValueArray[1]);
+            //table.PlayerInitialPlay(PlayerCardValueArray[0], PlayerCardValueArray[1]);
+            table.PlayerInitialPlay(playerCard1Type, playerCard2Type);
             playerTotalValue = PlayerCardValueArray[0] + PlayerCardValueArray[1];
 
-            table.ComputerInitialPlay(ComputerCardValueArray[0], ComputerCardValueArray[1]);
+            //table.ComputerInitialPlay(ComputerCardValueArray[0], ComputerCardValueArray[1]);
+            table.ComputerInitialPlay(computerCard1Type, computerCard2Type);
+
         }
 
-        
 
-        public void Hit()
+
+        public void Hit(int playerOrComputer)
         {
-            hitCount++;
-            int currentType = GetCardType();
-            int currentValue = ConvertCardValue(currentType);
-
-            PlayerCardValueArray[hitCount] = currentValue;
-            table.AddCard(PlayerCardValueArray[hitCount], hitCount);
-           
-            playerTotalValue += PlayerCardValueArray[hitCount];
-
-            if (playerTotalValue > 21 && PlayerCardValueArray.Contains(1))
+            switch (playerOrComputer)
             {
-                playerTotalValue -= 10;
-            }            
+                case 1:
+                    hitCount++;
+                    int currentType = GetCardType();
+                    int currentValue = ConvertCardValue(currentType);
+                    PlayerCardValueArray[hitCount] = currentValue;
+                    playerTotalValue += currentValue;
+                    table.AddCard(currentType, hitCount, playerOrComputer);
+
+                    if (playerTotalValue > 21 && PlayerCardValueArray.Contains(1))
+                    {
+                        playerTotalValue -= 10;
+                    }
+                    break;
+                case 2:
+                    int compHitCount = 1;
+                    while (computerTotalValue < 17)
+                    {
+                        compHitCount++;
+                        int cardType = GetCardType();
+                        int cardValue = ConvertCardValue(cardType);
+                        ComputerCardValueArray[compHitCount] = cardValue;
+                        computerTotalValue += cardValue;
+                        table.AddCard(cardType,compHitCount, playerOrComputer);
+                        if (computerTotalValue > 21 && ComputerCardValueArray.Contains(1)) //þarf að vera 11!!!! breyta úr value í type fyrir rétt conversion...
+                        {
+                            computerTotalValue -= 10;
+                        }
+                    }
+                    table.DisplayAllCards(playerTotalValue, computerTotalValue);
+                    break;
+            }
+                        
         }
 
-        public void GetValuesForComputer()
+        /*public void GetValuesForComputer()
         {
             int compHitCount = 1;
             computerTotalValue = ComputerCardValueArray[0] + ComputerCardValueArray[1];
@@ -101,7 +139,7 @@ namespace blackjackTest
                 }
             }
             table.DisplayAllCards(playerTotalValue, computerTotalValue);
-        }
+        }*/
 
         public void FindWinner()
         {

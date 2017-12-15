@@ -21,12 +21,13 @@ namespace blackjackTest
                 switch (dec)
                 {
                     case 1:
-                        game.Hit();
+                        game.Hit(1);
                         //game.GetCardValue();
                         running = true;
                         break;
                     case 2:
-                        game.GetValuesForComputer();
+                        //game.GetValuesForComputer();
+                        game.Hit(2);
                         game.FindWinner();
                         Console.ReadKey();
                         game.ResetTable();
