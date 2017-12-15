@@ -86,16 +86,14 @@ namespace ConsoleBlackjack
                     PlayerCardValueArray[hitCount] = currentValue;
                     playerTotalValue += currentValue;
                     table.AddCard(currentType, playerOrComputer, hitCount);
-
-                    //checka frekar type en value...hægt að breyta seinna eftir að ég geng úr skugga
-                    //um að values séu að convertast rétt
-
                     
+                    int pIndexOfAce = Array.IndexOf(PlayerCardType, 1);
 
-                    if (playerTotalValue > 21 && PlayerCardValueArray.Contains(11))
+                    if (playerTotalValue > 21 && pIndexOfAce != -1)
                     {
                         playerTotalValue -= 10;
-                    }
+                        PlayerCardType[pIndexOfAce] = 15;//some random value that is not being used otherwise
+                    }                                   //did this so the next time around it will not minus 10 again if the arguments are met
                     break;
                 case 2:
                     int compHitCount = 1;
@@ -108,9 +106,12 @@ namespace ConsoleBlackjack
                         ComputerCardValueArray[compHitCount] = cardValue;
                         computerTotalValue += cardValue;
                         table.AddCard(cardType, compHitCount, playerOrComputer);
-                        if (computerTotalValue > 21 && ComputerCardValueArray.Contains(1)) //þarf að vera 11!!!! breyta úr value í type fyrir rétt conversion...
+
+                        int cIndexOfAce = Array.IndexOf(ComputerCardType, 1);
+                        if (computerTotalValue > 21 && cIndexOfAce != -1) 
                         {
                             computerTotalValue -= 10;
+                            ComputerCardType[cIndexOfAce] = 15;
                         }
                     }
                     table.DisplayAllCards(playerTotalValue, computerTotalValue);
