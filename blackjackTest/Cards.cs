@@ -51,17 +51,17 @@ namespace blackjackTest
 
         }
 
-        public string GetCardString(int card3Val, int playerOrComputer, int numberOfCards) // 1 = player || 2 = computer
+        public string GetCardString(int cardValue, int playerOrComputer, int numberOfCards) // 1 = player || 2 = computer
         {
             string ret = string.Empty;
             switch (playerOrComputer)
             {
                 case 1:
-                    playerCards[numberOfCards] = GetCard(card3Val);
+                    playerCards[numberOfCards] = GetCard(cardValue);
                     ret = CardString(playerCards, numberOfCards);
                     break;
                 case 2:
-                    computerCards[numberOfCards] = GetCard(card3Val);
+                    computerCards[numberOfCards] = GetCard(cardValue);
                     ret = CardString(computerCards, numberOfCards);
                     break;
             }
@@ -122,49 +122,8 @@ namespace blackjackTest
         
         public string GetCard(int iCardType)
         {
-            string sCardType = string.Empty;
-            switch (iCardType)
-            {
-                case 1:
-                    sCardType = "A";
-                    break;
-                case 2:
-                    sCardType = "2";
-                    break;
-                case 3:
-                    sCardType = "3";
-                    break;
-                case 4:
-                    sCardType = "4";
-                    break;
-                case 5:
-                    sCardType = "5";
-                    break;
-                case 6:
-                    sCardType = "6";
-                    break;
-                case 7:
-                    sCardType = "7";
-                    break;
-                case 8:
-                    sCardType = "8";
-                    break;
-                case 9:
-                    sCardType = "9";
-                    break;
-                case 10:
-                    sCardType = "X"; //for the format...þarf að breyta hvernig spilið er sett upp með if setningu ef það á að virka með 2 stafa númeri
-                    break;
-                case 11:
-                    sCardType = "J";
-                    break;
-                case 12:
-                    sCardType = "Q";
-                    break;
-                case 13:
-                    sCardType = "K";
-                    break;
-            }
+            string[] cardType = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K" };
+            string sCardType = cardType[iCardType - 1];
             return sCardType;
         }
     }
