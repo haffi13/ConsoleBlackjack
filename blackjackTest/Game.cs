@@ -123,27 +123,27 @@ namespace ConsoleBlackjack
         {
             if(playerTotalValue > 21 && computerTotalValue <= 21) //afhverju telur gosi 11 ??
             {
-                Console.WriteLine("  --- Computer Wins ---");
+                Console.WriteLine("\n  --- Computer Wins ---");
             }
             else if(computerTotalValue > 21 && playerTotalValue <= 21)
             {
-                Console.WriteLine(" --- Player Wins ---");
+                Console.WriteLine("\n --- Player Wins ---");
             }
             else if(computerTotalValue > 21 && playerTotalValue > 21)
             {
-                Console.WriteLine(" --- Draw ---");
+                Console.WriteLine("\n --- Draw ---");
             }
             else if (playerTotalValue < computerTotalValue)
             {
-                Console.WriteLine("  --- Computer Wins ---");
+                Console.WriteLine("\n  --- Computer Wins ---");
             }
             else if (computerTotalValue < playerTotalValue)
             {
-                Console.WriteLine("  --- Player Wins ---");
+                Console.WriteLine("\n  --- Player Wins ---");
             }
             else
             {
-                Console.WriteLine(" --- Draw ---");
+                Console.WriteLine("\n --- Draw ---");
             }   
         }
 

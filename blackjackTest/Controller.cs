@@ -32,7 +32,9 @@ namespace ConsoleBlackjack
                         Console.ReadKey();
                         game.ResetTable();
                         running = false;
-                        Decision();
+                        Console.Clear();
+                        Menu m = new Menu();
+                        m.MainMenu();
                         break;
                     default:
                         Console.WriteLine("Selection is not valid");

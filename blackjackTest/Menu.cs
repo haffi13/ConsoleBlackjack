@@ -12,7 +12,9 @@ namespace ConsoleBlackjack
         public void MainMenu()
         {
             bool running = true;
-            Console.WriteLine("Press 1 to start game");
+            Console.WriteLine("\n\n1.Blackjack");
+            Console.WriteLine("0.Exit");
+            Console.Write("\nSelection: ");
             while (running)
                 switch (GetUserInput())
                 {
