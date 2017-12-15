@@ -17,17 +17,6 @@ namespace blackjackTest
         int[] ComputerCardValueArray = new int[10];
         int hitCount = 1;
 
-        public void ClearCardValues() //might not be neccisery
-        {
-            computerTotalValue = 0;
-            playerTotalValue = 0;
-            for (int i = 0; i < 10; i++)
-            {
-                PlayerCardValueArray[i] = 0;
-                ComputerCardValueArray[i] = 0; 
-            }
-        }
-        
         public int GetCardType()
         {
             int cardType = random.Next(1, 14);
@@ -91,7 +80,7 @@ namespace blackjackTest
                     int currentValue = ConvertCardValue(currentType);
                     PlayerCardValueArray[hitCount] = currentValue;
                     playerTotalValue += currentValue;
-                    table.AddCard(currentType, hitCount, playerOrComputer);
+                    table.AddCard(currentType, playerOrComputer, hitCount);
 
                     if (playerTotalValue > 21 && PlayerCardValueArray.Contains(1))
                     {
