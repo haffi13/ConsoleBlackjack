@@ -20,7 +20,7 @@ namespace ConsoleBlackjack
                 {
                     case 1: StartGame(); break;
                     case 0: running = false; break;
-                    default: Console.WriteLine("Wrong input"); break;
+                    default: Console.WriteLine("Selection is not valid"); break;
                 }
         }
         public void StartGame()

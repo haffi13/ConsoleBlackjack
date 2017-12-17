@@ -20,14 +20,14 @@ namespace ConsoleBlackjack
         int[] ComputerCardType = new int[10];
         int hitCount = 1;
 
-        public int GetCardType()
+        private int GetCardType()
         {
             int cardType = random.Next(1, 14);
            
             return cardType;
         }
 
-        public int ConvertCardValue(int cardType)
+        private int ConvertCardValue(int cardType)
         {
             int cardValue = cardType;
             if (cardValue > 10)
@@ -43,7 +43,6 @@ namespace ConsoleBlackjack
 
         public void InitialPlay()
         {
-            
             int playerCard1Value, playerCard2Value, playerCard1Type, playerCard2Type;
             int computerCard1Value, computerCard2Value, computerCard1Type, computerCard2Type;
             playerCard1Type = GetCardType();
@@ -114,37 +113,39 @@ namespace ConsoleBlackjack
                             ComputerCardType[cIndexOfAce] = 15;
                         }
                     }
-                    table.DisplayAllCards(playerTotalValue, computerTotalValue);
+                    table.DisplayAllCards(playerTotalValue, computerTotalValue, FindWinner());
                     break;
             }
         }
         
-        public void FindWinner()
+        private string FindWinner()
         {
+            string results = string.Empty;
             if(playerTotalValue > 21 && computerTotalValue <= 21) //afhverju telur gosi 11 ??
             {
-                Console.WriteLine("\n  --- Computer Wins ---");
+                results = ("\n  --- Computer Wins ---");
             }
             else if(computerTotalValue > 21 && playerTotalValue <= 21)
             {
-                Console.WriteLine("\n --- Player Wins ---");
+                results = ("\n --- Player Wins ---");
             }
             else if(computerTotalValue > 21 && playerTotalValue > 21)
             {
-                Console.WriteLine("\n --- Draw ---");
+                results = ("\n --- Draw ---");
             }
             else if (playerTotalValue < computerTotalValue)
             {
-                Console.WriteLine("\n  --- Computer Wins ---");
+                results = ("\n  --- Computer Wins ---");
             }
             else if (computerTotalValue < playerTotalValue)
             {
-                Console.WriteLine("\n  --- Player Wins ---");
+                results = ("\n  --- Player Wins ---");
             }
             else
             {
-                Console.WriteLine("\n --- Draw ---");
-            }   
+                results = ("\n --- Draw ---");
+            }
+            return results;
         }
 
         public void ResetTable()
@@ -152,7 +153,6 @@ namespace ConsoleBlackjack
             table.playerCardString = string.Empty;
             table.computerCardString = string.Empty;
             table.displayString = string.Empty;
-            table.ClearLocalCards();
             for (int i = 0; i < PlayerCardValueArray.Length; i++)
             {
                 PlayerCardValueArray[i] = 0;

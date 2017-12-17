@@ -9,6 +9,7 @@ namespace ConsoleBlackjack
     class Controller
     {
         Game game = new Game();
+        Program p = new Program();
         public void Decision()
         {
             game.InitialPlay();
@@ -22,13 +23,10 @@ namespace ConsoleBlackjack
                 {
                     case 1:
                         game.Hit(1);
-                        //game.GetCardValue();
                         running = true;
                         break;
                     case 2:
-                        //game.GetValuesForComputer();
                         game.Hit(2);
-                        game.FindWinner();
                         Console.ReadKey();
                         game.ResetTable();
                         running = false;

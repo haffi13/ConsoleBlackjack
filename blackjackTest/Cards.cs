@@ -11,16 +11,7 @@ namespace ConsoleBlackjack
 
         string[] playerCards = new string[10];
         string[] computerCards = new string[10];
-
-        public void PopulateCardArrays()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                playerCards[i] = string.Empty;
-                computerCards[i] = string.Empty;
-            }
-        }
-
+        
         public string InitialPlay(int card1Val, int Card2Val, int playerOrComputer) // 1 = player || 2 = computer
         {
             string card1 = string.Empty, card2 = string.Empty;
