@@ -5,7 +5,7 @@ namespace ConsoleBlackjack
     class Controller
     {
         Game game = new Game();
-        //Program p = new Program();
+
         public void Decision()
         {
             game.InitialPlay(1);
@@ -13,9 +13,8 @@ namespace ConsoleBlackjack
             while (running)
             {
                 Console.WriteLine("1 - Hit\n2 - Show");
-                int dec = Convert.ToInt32(Console.ReadLine());  //make this better!
 
-                switch (dec)
+                switch (GetUserInput())
                 {
                     case 1:
                         game.Hit(1);
@@ -34,6 +33,26 @@ namespace ConsoleBlackjack
                         break;
                 }
             }
+        }
+
+        public int GetUserInput()
+        {
+            bool invalidSelection = true;
+            int iInput = 0;
+            while (invalidSelection)
+            {
+                string sInput = Console.ReadLine();
+                bool validSelection = Int32.TryParse(sInput, out iInput);
+                if (validSelection)
+                {
+                    invalidSelection = false;
+                }
+                else
+                {
+                    Console.WriteLine("Selection is not valid.");
+                }
+            }
+            return iInput;
         }
     }
 }

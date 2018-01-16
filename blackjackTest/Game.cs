@@ -32,7 +32,7 @@ namespace ConsoleBlackjack
             if(cardsDrawn > 51)
             {
                 Console.Clear();
-                Console.WriteLine("adafad");
+                Console.WriteLine("The deck is empty");
             }
             bool CardUnavailable = true;
             int ranNum = 0;
@@ -53,7 +53,7 @@ namespace ConsoleBlackjack
                 CardSort = 0;
                 cardType = ranNum;
             }
-            if (ranNum > 13 && ranNum <= 26)
+            else if (ranNum > 13 && ranNum <= 26)
             {
                 //sort is spades
                 CardSort = 1;
@@ -107,7 +107,7 @@ namespace ConsoleBlackjack
                     int currentValue = ConvertCardValue(currentType);
                     PlayerCardValueArray[playerHitCount] = currentValue;
                     playerTotalValue += currentValue;
-                    table.AddCard(currentType, CardSort, playerOrComputer, playerHitCount);//bæta við sortinni hér
+                    table.AddCard(currentType, CardSort, playerOrComputer, playerHitCount);
                     
                     int pIndexOfAce = Array.IndexOf(PlayerCardType, 1);
 
