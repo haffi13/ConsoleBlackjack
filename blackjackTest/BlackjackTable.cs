@@ -14,15 +14,15 @@ namespace ConsoleBlackjack
         public string computerCardString = string.Empty;
         public string displayString = string.Empty;
 
-        public void AddCard(int cardType, int playerOrComputer, int numOfCards) // 1=player||2=computer 
+        public void AddCard(int cardType, int cardSort, int playerOrComputer, int numOfCards) // 1=player||2=computer 
         {
             switch (playerOrComputer)
             {
                 case 1:
-                    playerCardString = cards.GetCardString(cardType, playerOrComputer, numOfCards);
+                    playerCardString = cards.GetCardString(cardType, cardSort , playerOrComputer, numOfCards);
                     break;
                 case 2:
-                    computerCardString = cards.GetCardString(cardType, playerOrComputer, numOfCards);
+                    computerCardString = cards.GetCardString(cardType, cardSort, playerOrComputer, numOfCards);
                     break;
             }
             Console.Clear();

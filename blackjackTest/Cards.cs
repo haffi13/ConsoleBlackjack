@@ -8,9 +8,13 @@ namespace ConsoleBlackjack
 {
     public class Cards
     {
+        //þar sem initial play kallar á GetCard þarf að bæta við cardSort sem argument, reyna að finna leið til að
+        //sleppa initial play í stað þess að laga þetta...
 
         string[] playerCards = new string[10];
+        char[] playerSorts = new char[10];
         string[] computerCards = new string[10];
+        char[] computerSorts = new char[10];
         
         public string InitialPlay(int card1Val, int Card2Val, int playerOrComputer) // 1 = player || 2 = computer
         {
@@ -42,34 +46,36 @@ namespace ConsoleBlackjack
 
         }
 
-        public string GetCardString(int cardValue, int playerOrComputer, int numberOfCards) // 1 = player || 2 = computer
+        public string GetCardString(int cardType, int cardSort, int playerOrComputer, int numberOfCards) // 1 = player || 2 = computer
         {
             string ret = string.Empty;
             switch (playerOrComputer)
             {
                 case 1:
-                    playerCards[numberOfCards] = GetCard(cardValue);
-                    ret = CardString(playerCards, numberOfCards);
+                    playerCards[numberOfCards] = GetCardLogo(cardType);
+                    playerSorts[numberOfCards] = GetSortLogo(cardSort);
+                    ret = CardString(playerCards, playerSorts, numberOfCards);
                     break;
                 case 2:
-                    computerCards[numberOfCards] = GetCard(cardValue);
-                    ret = CardString(computerCards, numberOfCards);
+                    computerCards[numberOfCards] = GetCardLogo(cardType);
+                    computerSorts[numberOfCards] = GetSortLogo(cardSort);
+                    ret = CardString(computerCards, computerSorts, numberOfCards);
                     break;
             }
             return ret;
         }
 
-        public string CardString(string[] cards, int numberOfCards)
+        public string CardString(string[] cards, char[] sorts, int numberOfCards)
         {
             string tableTemplate = string.Empty;
             switch (numberOfCards)
             {
                 case 1:
                     tableTemplate = @"  .------." + @"  .------." + "\n" +
-                                    @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + "\n" +
+                                    @"  |" + cards[0] + ".--." + sorts[0] + "|" + @"  |" + cards[1] + ".--." + sorts[1] + "|" + "\n" +
                                     @"  | (\/) |" + @"  | (\/) |" + "\n" +
                                     @"  | :\/: |" + @"  | :\/: |" + "\n" +
-                                    @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + "\n" +
+                                    @"  |" + sorts[0] + "'--'" + cards[0] + "|" + @"  |" + sorts[1] + "'--'" + cards[1] + "|" + "\n" +
                                     @"  `------'" + @"  `------'" + "\n";
                     break;
                 case 2:
@@ -104,18 +110,39 @@ namespace ConsoleBlackjack
                                     @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + cards[2] + "|" + @"  | '--'" + cards[3] + "|" + @"  | '--'" + cards[4] + "|" + @"  | '--'" + cards[5] + "|" + "\n" +
                                     @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + "\n";
                     break;
-                case 6:
+                case 6: // 6 = 7spil
+                        //bæta við upp að 10 spilum
+                    tableTemplate = @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + "\n" +
+                                @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + cards[2] + ".--. |" + @"  |" + cards[3] + ".--. |" + @"  |" + cards[4] + ".--. |" + @"  |" + cards[5] + ".--. |" + @"  |" + cards[6] + ".--. |" + "\n" +
+                                @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
+                                @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
+                                @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + cards[2] + "|" + @"  | '--'" + cards[3] + "|" + @"  | '--'" + cards[4] + "|" + @"  | '--'" + cards[5] + "|" + @"  | '--'" + cards[6] + "|" + "\n" +
+                                @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + "\n";
+                    break;
+                case 7:
+                    //8spil
+                    break;
 
+                case 8:
+                    //9spil
+                    break;
+                case 9:
+                    //10spil
                     break;
             }
             return tableTemplate;
         }
         
-        public string GetCard(int iCardType)
+        public string GetCardLogo(int iCardType)
         {
             string[] cardType = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K" };
-            string sCardType = cardType[iCardType - 1];
-            return sCardType;
+            return cardType[iCardType - 1];// -1 for zero based index
+        }
+
+        public char GetSortLogo(int iCardSort) //sort is 0-3 heart,spade,diamond,clubs
+        {
+            char[] cardSort = { '\u2665', '\u2660', '\u2666', '\u2663' };// h s d c
+            return cardSort[iCardSort];
         }
     }
 }
