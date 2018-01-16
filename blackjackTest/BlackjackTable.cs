@@ -44,17 +44,5 @@ namespace ConsoleBlackjack
         {
             cards.ResetCards();
         }
-        
-       /* public void PlayerInitialPlay(int card1Type, int card2Type)
-        {
-            Console.Clear();
-            playerCardString = cards.InitialPlay(card1Type, card2Type, 1);
-            Console.WriteLine(playerCardString);
-        }
-        public void ComputerInitialPlay(int card1Type, int card2Type)
-        {
-            computerCardString = cards.InitialPlay(card1Type, card2Type, 2);
-        }*/
-
     }
 }

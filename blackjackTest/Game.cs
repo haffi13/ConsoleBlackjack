@@ -90,43 +90,6 @@ namespace ConsoleBlackjack
             return cardValue;
         }
 
-       /* public void InitialPlay()
-        {
-            //laga þetta rusl...vesen þar sem ég passa bara einni sort í einu
-            //hægt að taka út variables hér og senda beint í arrays sem eru til staðar í class-inum. 
-            //hægt að gera þetta í einni for loop-u þar sem bæði initial-play eru bara 2 spil.
-            //hægt að converta og gera allt inní looppunni
-            //Gera annað method meðan ég er að testa 
-            int playerCard1Value, playerCard2Value, playerCard1Type, playerCard2Type;
-            int computerCard1Value, computerCard2Value, computerCard1Type, computerCard2Type;
-            playerCard1Type = GetCardAttributes();
-            playerCard2Type = GetCardAttributes();
-            PlayerCardType[0] = playerCard1Type;
-            PlayerCardType[1] = playerCard2Type;
-            computerCard1Type = GetCardAttributes();
-            computerCard2Type = GetCardAttributes();
-            ComputerCardType[0] = computerCard1Type;
-            ComputerCardType[1] = computerCard2Type;
-            playerCard1Value = ConvertCardValue(playerCard1Type);
-            playerCard2Value = ConvertCardValue(playerCard2Type);
-            computerCard1Value = ConvertCardValue(computerCard1Type);
-            computerCard2Value = ConvertCardValue(computerCard2Type);
-            PlayerCardValueArray[0] = playerCard1Value;
-            PlayerCardValueArray[1] = playerCard2Value;
-            playerTotalValue = PlayerCardValueArray[0] + PlayerCardValueArray[1];
-            ComputerCardValueArray[0] = computerCard1Value;
-            ComputerCardValueArray[1] = computerCard2Value;
-            computerTotalValue = ComputerCardValueArray[0] + ComputerCardValueArray[1];
-
-            Console.Clear();
-            //table.PlayerInitialPlay(PlayerCardValueArray[0], PlayerCardValueArray[1]);
-            table.PlayerInitialPlay(playerCard1Type, playerCard2Type);
-            playerTotalValue = PlayerCardValueArray[0] + PlayerCardValueArray[1];
-
-            //table.ComputerInitialPlay(ComputerCardValueArray[0], ComputerCardValueArray[1]);
-            table.ComputerInitialPlay(computerCard1Type, computerCard2Type);
-        }*/
-
         public void InitialPlay(int playerOrComputer)
         {
             for (int i = 0; i < 2; i++)   
@@ -216,15 +179,16 @@ namespace ConsoleBlackjack
             table.computerCardString = string.Empty;
             table.displayString = string.Empty;
             table.ResetCards();                         
-            for (int i = 0; i < PlayerCardValueArray.Length; i++)//have only one for loop going 10 times as the array size is fixed at 10
+            //have only one for loop going 10 times as the array size is fixed at 10
+            for (int i = 0; i < 10; i++)
             {
                 PlayerCardValueArray[i] = 0;
-            }
-            for (int i = 0; i < ComputerCardValueArray.Length; i++)
-            {
+                PlayerCardType[i] = 0;
                 ComputerCardValueArray[i] = 0;
+                ComputerCardType[i] = 0;
             }
-            hitCount = 1;
+            hitCount = -1;
+            compHitCount = -1;
             playerTotalValue = 0;
             computerTotalValue = 0;
         }

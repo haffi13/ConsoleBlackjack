@@ -8,43 +8,10 @@ namespace ConsoleBlackjack
 {
     public class Cards
     {
-        //þar sem initial play kallar á GetCard þarf að bæta við cardSort sem argument, reyna að finna leið til að
-        //sleppa initial play í stað þess að laga þetta...
-
         string[] playerCards = new string[10];
         char[] playerSorts = new char[10];
         string[] computerCards = new string[10];
-        char[] computerSorts = new char[10];
-        
-       /* public string InitialPlay(int card1Val, int Card2Val, int playerOrComputer) // 1 = player || 2 = computer
-        {
-            string card1 = string.Empty, card2 = string.Empty;
-            switch (playerOrComputer)
-            {
-                case 1:
-                    playerCards[0] = GetCard(card1Val);
-                    playerCards[1] = GetCard(Card2Val);
-                    card1 = playerCards[0];
-                    card2 = playerCards[1];
-                    break;
-                case 2:
-                    computerCards[0] = GetCard(card1Val);
-                    computerCards[1] = GetCard(Card2Val);
-                    card1 = computerCards[0];
-                    card2 = computerCards[1];
-                    break;
-            }
-
-            string cardtemplate = @"  .------." + @"  .------." + "\n" +
-                                   @"  |" + card1 + ".--. |" + @"  |" + card2 + ".--. |" + "\n" +
-                                   @"  | (\/) |" + @"  | (\/) |" + "\n" +
-                                   @"  | :\/: |" + @"  | :\/: |" + "\n" +
-                                   @"  | '--'" + card1 + "|" + @"  | '--'" + card2 + "|" + "\n" +
-                                   @"  `------'" + @"  `------'" + "\n";
-
-            return cardtemplate;
-
-        }*/
+        char[] computerSorts = new char[10];        
 
         public string GetCardString(int cardType, int cardSort, int playerOrComputer, int numberOfCards) // 1 = player || 2 = computer
         {
@@ -155,6 +122,5 @@ namespace ConsoleBlackjack
                 computerSorts[i] = ' ';
             }
         }
-
     }
 }
