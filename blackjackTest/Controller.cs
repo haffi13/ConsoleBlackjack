@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleBlackjack
 {
@@ -32,8 +28,6 @@ namespace ConsoleBlackjack
                         game.ResetTable();
                         running = false;
                         Console.Clear();
-                        //Menu m = new Menu();
-                        //m.MainMenu();
                         break;
                     default:
                         Console.WriteLine("Selection is not valid");

@@ -1,41 +1,39 @@
-﻿using System;   
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleBlackjack
 {
     class Game
     {
-        //Taka góðan tour um forritið og samhæfa nöfn á methods.
-        //Checka að bæta við class eða rename-a table og display-a bara þar
-        //til að fylgja standards. 
-
         BlackjackTable table = new BlackjackTable();
 
         Random random = new Random();
+        
+        List<int> UnavailableCards = new List<int>();
+
         int playerTotalValue = 0;
         int computerTotalValue = 0;
-
-        //char[] cardSort = { '\u2665', '\u2660', '\u2666', '\u2663' };// h s d c
-        List<int> UnavailableCards = new List<int>();
 
         int[] PlayerCardValueArray = new int[10];
         int[] PlayerCardType = new int[10];
         int[] ComputerCardValueArray = new int[10];
         int[] ComputerCardType = new int[10];
-        int hitCount = -1;
-        int compHitCount = -1;
+        int playerHitCount = -1;
+        int computerHitCount = -1;
+
+        int cardsDrawn = 0;// just there for testing purposes
 
         private int CardSort { get; set; } //0 = hearts, 1 = spades, 2 = diamonds, 3 = clubs
 
-        //utf-8 encoding here, in table or both?
-        //if only in table then send utf-8 value as string or num which corresponds with symbol in the other class.
-        //keep tracks of what ranNums have come before and if it lands on one of those it gets a new number
-
+        //need to figure out how to keep going if the deck is finishing or how to structure the game around it...figure out!
         private int GetCardAttributes()
         {
+            cardsDrawn++;
+            if(cardsDrawn > 51)
+            {
+                Console.Clear();
+                Console.WriteLine("adafad");
+            }
             bool CardUnavailable = true;
             int ranNum = 0;
             int cardType = 0;
@@ -103,13 +101,13 @@ namespace ConsoleBlackjack
             switch (playerOrComputer)
             {
                 case 1:
-                    hitCount++;
+                    playerHitCount++;
                     int currentType = GetCardAttributes();
-                    PlayerCardType[hitCount] = currentType;
+                    PlayerCardType[playerHitCount] = currentType;
                     int currentValue = ConvertCardValue(currentType);
-                    PlayerCardValueArray[hitCount] = currentValue;
+                    PlayerCardValueArray[playerHitCount] = currentValue;
                     playerTotalValue += currentValue;
-                    table.AddCard(currentType, CardSort, playerOrComputer, hitCount);//bæta við sortinni hér
+                    table.AddCard(currentType, CardSort, playerOrComputer, playerHitCount);//bæta við sortinni hér
                     
                     int pIndexOfAce = Array.IndexOf(PlayerCardType, 1);
 
@@ -123,13 +121,13 @@ namespace ConsoleBlackjack
                     
                     while (computerTotalValue < 17)
                     {
-                        compHitCount++;
+                        computerHitCount++;
                         int cardType = GetCardAttributes();
-                        ComputerCardType[compHitCount] = cardType;
+                        ComputerCardType[computerHitCount] = cardType;
                         int cardValue = ConvertCardValue(cardType);
-                        ComputerCardValueArray[compHitCount] = cardValue;
+                        ComputerCardValueArray[computerHitCount] = cardValue;
                         computerTotalValue += cardValue;
-                        table.AddCard(cardType, CardSort, playerOrComputer, compHitCount);
+                        table.AddCard(cardType, CardSort, playerOrComputer, computerHitCount);
 
                         int cIndexOfAce = Array.IndexOf(ComputerCardType, 1);
                         if (computerTotalValue > 21 && cIndexOfAce != -1) 
@@ -177,7 +175,6 @@ namespace ConsoleBlackjack
         {
             table.playerCardString = string.Empty;
             table.computerCardString = string.Empty;
-            table.displayString = string.Empty;
             table.ResetCards();                         
             //have only one for loop going 10 times as the array size is fixed at 10
             for (int i = 0; i < 10; i++)
@@ -187,8 +184,8 @@ namespace ConsoleBlackjack
                 ComputerCardValueArray[i] = 0;
                 ComputerCardType[i] = 0;
             }
-            hitCount = -1;
-            compHitCount = -1;
+            playerHitCount = -1;
+            computerHitCount = -1;
             playerTotalValue = 0;
             computerTotalValue = 0;
         }

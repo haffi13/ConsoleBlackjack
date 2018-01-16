@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleBlackjack
 {
@@ -12,7 +8,6 @@ namespace ConsoleBlackjack
 
         public string playerCardString = string.Empty;
         public string computerCardString = string.Empty;
-        public string displayString = string.Empty;
 
         public void AddCard(int cardType, int cardSort, int playerOrComputer, int numOfCards) // 1=player||2=computer 
         {
@@ -20,8 +15,8 @@ namespace ConsoleBlackjack
             {
                 case 1:
                     playerCardString = cards.GetCardString(cardType, cardSort, playerOrComputer, numOfCards);
-                    Console.Clear();
-                    Console.WriteLine(playerCardString);
+
+                    Display(playerCardString);
                     break;
                 case 2:
                     computerCardString = cards.GetCardString(cardType, cardSort, playerOrComputer, numOfCards);
@@ -31,13 +26,17 @@ namespace ConsoleBlackjack
 
         public void DisplayAllCards(int playerTotal, int computerTotal, string winner)
         {
-            Console.Clear();
-            displayString = playerCardString + "\nPlayer: " + playerTotal + "\n\n"+ winner +
+            string display = playerCardString + "\nPlayer: " + playerTotal + "\n\n"+ winner +
                             
                 "\n\n" + computerCardString + "\nComputer: " + computerTotal;
 
-            Console.WriteLine(displayString);
-            //Console.ReadKey();
+            Display(display);
+        }
+
+        private void Display(string message)
+        {
+            Console.Clear();
+            Console.WriteLine(message);
         }
 
         public void ResetCards()
