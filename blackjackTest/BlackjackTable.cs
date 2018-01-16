@@ -19,14 +19,14 @@ namespace ConsoleBlackjack
             switch (playerOrComputer)
             {
                 case 1:
-                    playerCardString = cards.GetCardString(cardType, cardSort , playerOrComputer, numOfCards);
+                    playerCardString = cards.GetCardString(cardType, cardSort, playerOrComputer, numOfCards);
+                    Console.Clear();
+                    Console.WriteLine(playerCardString);
                     break;
                 case 2:
                     computerCardString = cards.GetCardString(cardType, cardSort, playerOrComputer, numOfCards);
                     break;
             }
-            Console.Clear();
-            Console.WriteLine(playerCardString);
         }
 
         public void DisplayAllCards(int playerTotal, int computerTotal, string winner)
@@ -37,10 +37,15 @@ namespace ConsoleBlackjack
                 "\n\n" + computerCardString + "\nComputer: " + computerTotal;
 
             Console.WriteLine(displayString);
-            Console.ReadKey();
+            //Console.ReadKey();
+        }
+
+        public void ResetCards()
+        {
+            cards.ResetCards();
         }
         
-        public void PlayerInitialPlay(int card1Type, int card2Type)
+       /* public void PlayerInitialPlay(int card1Type, int card2Type)
         {
             Console.Clear();
             playerCardString = cards.InitialPlay(card1Type, card2Type, 1);
@@ -49,6 +54,7 @@ namespace ConsoleBlackjack
         public void ComputerInitialPlay(int card1Type, int card2Type)
         {
             computerCardString = cards.InitialPlay(card1Type, card2Type, 2);
-        }
+        }*/
+
     }
 }

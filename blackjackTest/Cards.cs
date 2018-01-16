@@ -16,7 +16,7 @@ namespace ConsoleBlackjack
         string[] computerCards = new string[10];
         char[] computerSorts = new char[10];
         
-        public string InitialPlay(int card1Val, int Card2Val, int playerOrComputer) // 1 = player || 2 = computer
+       /* public string InitialPlay(int card1Val, int Card2Val, int playerOrComputer) // 1 = player || 2 = computer
         {
             string card1 = string.Empty, card2 = string.Empty;
             switch (playerOrComputer)
@@ -44,7 +44,7 @@ namespace ConsoleBlackjack
 
             return cardtemplate;
 
-        }
+        }*/
 
         public string GetCardString(int cardType, int cardSort, int playerOrComputer, int numberOfCards) // 1 = player || 2 = computer
         {
@@ -65,7 +65,7 @@ namespace ConsoleBlackjack
             return ret;
         }
 
-        public string CardString(string[] cards, char[] sorts, int numberOfCards)
+        private string CardString(string[] cards, char[] sorts, int numberOfCards)
         {
             string tableTemplate = string.Empty;
             switch (numberOfCards)
@@ -80,43 +80,43 @@ namespace ConsoleBlackjack
                     break;
                 case 2:
                     tableTemplate = @"  .------." + @"  .------." + @"  .------." + "\n" +
-                                    @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + cards[2] + ".--. |" + "\n" +
+                                    @"  |" + cards[0] + ".--." + sorts[0] + "|" + @"  |" + cards[1] + ".--." + sorts[1] + "|" + @"  |" + cards[2] + ".--." + sorts[2] + "|" + "\n" +
                                     @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
                                     @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
-                                    @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + cards[2] + "|" + "\n" +
+                                    @"  |" + sorts[0] + "'--'" + cards[0] + "|" + @"  |" + sorts[1] + "'--'" + cards[1] + "|" + @"  |" + sorts[2] + "'--'" + cards[2] + "|" + "\n" +
                                     @"  `------'" + @"  `------'" + @"  `------'" + "\n";
                     break;
                 case 3:
                     tableTemplate = @"  .------." + @"  .------." + @"  .------." + @"  .------." + "\n" +
-                                    @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + cards[2] + ".--. |" + @"  |" + cards[3] + ".--. |" + "\n" +
+                                    @"  |" + cards[0] + ".--." + sorts[0] + "|" + @"  |" + cards[1] + ".--." + sorts[1] + "|" + @"  |" + cards[2] + ".--." + sorts[2] + "|" + @"  |" + cards[3] + ".--." + sorts[3] + "|" + "\n" +
                                     @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
                                     @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
-                                    @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + cards[2] + "|" + @"  | '--'" + cards[3] + "|" + "\n" +
+                                    @"  |" + sorts[0] + "'--'" + cards[0] + "|" + @"  |" + sorts[1] + "'--'" + cards[1] + "|" + @"  |" + sorts[2] + "'--'" + cards[2] + "|" + @"  |" + sorts[3] + "'--'" + cards[3] + "|" + "\n" +
                                     @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + "\n";
                     break;
                 case 4:
                     tableTemplate = @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + "\n" +
-                                    @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + cards[2] + ".--. |" + @"  |" + cards[3] + ".--. |" + @"  |" + cards[4] + ".--. |" + "\n" +
+                                    @"  |" + cards[0] + ".--." + sorts[0] + "|" + @"  |" + cards[1] + ".--." + sorts[1] + "|" + @"  |" + cards[2] + ".--." + sorts[2] + "|" + @"  |" + cards[3] + ".--." + sorts[3] + "|" + @"  |" + cards[4] + ".--." + sorts[4] + "|" + "\n" +
                                     @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
                                     @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
-                                    @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + cards[2] + "|" + @"  | '--'" + cards[3] + "|" + @"  | '--'" + cards[4] + "|" + "\n" +
+                                    @"  |" + sorts[0] + "'--'" + cards[0] + "|" + @"  |" + sorts[1] + "'--'" + cards[1] + "|" + @"  |" + sorts[2] + "'--'" + cards[2] + "|" + @"  |" + sorts[3] + "'--'" + cards[3] + "|" + @"  |" + sorts[4] + "'--'" + cards[4] + "|" + "\n" +
                                     @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + "\n";
                     break;
                 case 5:
                     tableTemplate = @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + "\n" +
-                                    @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + cards[2] + ".--. |" + @"  |" + cards[3] + ".--. |" + @"  |" + cards[4] + ".--. |" + @"  |" + cards[5] + ".--. |" + "\n" +
+                                    @"  |" + cards[0] + ".--." + sorts[0] + "|" + @"  |" + cards[1] + ".--." + sorts[1] + "|" + @"  |" + cards[2] + ".--." + sorts[2] + "|" + @"  |" + cards[3] + ".--." + sorts[3] + "|" + @"  |" + cards[4] + ".--." + sorts[4] + "|" + @"  |" + cards[5] + ".--." + sorts[5] + "|" + "\n" +
                                     @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
                                     @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
-                                    @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + cards[2] + "|" + @"  | '--'" + cards[3] + "|" + @"  | '--'" + cards[4] + "|" + @"  | '--'" + cards[5] + "|" + "\n" +
+                                    @"  |" + sorts[0] + "'--'" + cards[0] + "|" + @"  |" + sorts[1] + "'--'" + cards[1] + "|" + @"  |" + sorts[2] + "'--'" + cards[2] + "|" + @"  |" + sorts[3] + "'--'" + cards[3] + "|" + @"  |" + sorts[4] + "'--'" + cards[4] + "|" + @"  |" + sorts[5] + "'--'" + cards[5] + "|" + "\n" +
                                     @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + "\n";
                     break;
                 case 6: // 6 = 7spil
                         //bæta við upp að 10 spilum
                     tableTemplate = @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + @"  .------." + "\n" +
-                                @"  |" + cards[0] + ".--. |" + @"  |" + cards[1] + ".--. |" + @"  |" + cards[2] + ".--. |" + @"  |" + cards[3] + ".--. |" + @"  |" + cards[4] + ".--. |" + @"  |" + cards[5] + ".--. |" + @"  |" + cards[6] + ".--. |" + "\n" +
+                                @"  |" + cards[0] + ".--." + sorts[0] + "|" + @"  |" + cards[1] + ".--." + sorts[1] + "|" + @"  |" + cards[2] + ".--." + sorts[2] + "|" + @"  |" + cards[3] + ".--." + sorts[3] + "|" + @"  |" + cards[4] + ".--." + sorts[4] + "|" + @"  |" + cards[5] + ".--." + sorts[5] + "|" + @"  |" + cards[6] + ".--." + sorts[6] + "|" + "\n" +
                                 @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + @"  | (\/) |" + "\n" +
                                 @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + @"  | :\/: |" + "\n" +
-                                @"  | '--'" + cards[0] + "|" + @"  | '--'" + cards[1] + "|" + @"  | '--'" + cards[2] + "|" + @"  | '--'" + cards[3] + "|" + @"  | '--'" + cards[4] + "|" + @"  | '--'" + cards[5] + "|" + @"  | '--'" + cards[6] + "|" + "\n" +
+                                @"  |" + sorts[0] + "'--'" + cards[0] + "|" + @"  |" + sorts[1] + "'--'" + cards[1] + "|" + @"  |" + sorts[2] + "'--'" + cards[2] + "|" + @"  |" + sorts[3] + "'--'" + cards[3] + "|" + @"  |" + sorts[4] + "'--'" + cards[4] + "|" + @"  |" + sorts[5] + "'--'" + cards[5] + "|" + @"  |" + sorts[6] + "'--'" + cards[6] + "|" + "\n" +
                                 @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + @"  `------'" + "\n";
                     break;
                 case 7:
@@ -133,16 +133,28 @@ namespace ConsoleBlackjack
             return tableTemplate;
         }
         
-        public string GetCardLogo(int iCardType)
+        private string GetCardLogo(int iCardType)
         {
             string[] cardType = { "A", "2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K" };
             return cardType[iCardType - 1];// -1 for zero based index
         }
 
-        public char GetSortLogo(int iCardSort) //sort is 0-3 heart,spade,diamond,clubs
+        private char GetSortLogo(int iCardSort) //sort is 0-3 heart,spade,diamond,clubs
         {
             char[] cardSort = { '\u2665', '\u2660', '\u2666', '\u2663' };// h s d c
             return cardSort[iCardSort];
         }
+
+        public void ResetCards()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                playerCards[i] = string.Empty;
+                playerSorts[i] = ' ';
+                computerCards[i] = string.Empty;
+                computerSorts[i] = ' ';
+            }
+        }
+
     }
 }

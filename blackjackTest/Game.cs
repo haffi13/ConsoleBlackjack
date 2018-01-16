@@ -25,7 +25,8 @@ namespace ConsoleBlackjack
         int[] PlayerCardType = new int[10];
         int[] ComputerCardValueArray = new int[10];
         int[] ComputerCardType = new int[10];
-        int hitCount = 1;
+        int hitCount = -1;
+        int compHitCount = -1;
 
         private int CardSort { get; set; } //0 = hearts, 1 = spades, 2 = diamonds, 3 = clubs
 
@@ -89,7 +90,7 @@ namespace ConsoleBlackjack
             return cardValue;
         }
 
-        public void InitialPlay()
+       /* public void InitialPlay()
         {
             //laga þetta rusl...vesen þar sem ég passa bara einni sort í einu
             //hægt að taka út variables hér og senda beint í arrays sem eru til staðar í class-inum. 
@@ -124,6 +125,14 @@ namespace ConsoleBlackjack
 
             //table.ComputerInitialPlay(ComputerCardValueArray[0], ComputerCardValueArray[1]);
             table.ComputerInitialPlay(computerCard1Type, computerCard2Type);
+        }*/
+
+        public void InitialPlay(int playerOrComputer)
+        {
+            for (int i = 0; i < 2; i++)   
+            {
+                Hit(playerOrComputer);
+            }
         }
 
         public void Hit(int playerOrComputer)
@@ -148,7 +157,7 @@ namespace ConsoleBlackjack
                     }                                   //did this so the next time around it will not minus 10 again if the arguments are met
                     break;
                 case 2:
-                    int compHitCount = 1;
+                    
                     while (computerTotalValue < 17)
                     {
                         compHitCount++;
@@ -157,7 +166,7 @@ namespace ConsoleBlackjack
                         int cardValue = ConvertCardValue(cardType);
                         ComputerCardValueArray[compHitCount] = cardValue;
                         computerTotalValue += cardValue;
-                        table.AddCard(cardType, CardSort, compHitCount, playerOrComputer);
+                        table.AddCard(cardType, CardSort, playerOrComputer, compHitCount);
 
                         int cIndexOfAce = Array.IndexOf(ComputerCardType, 1);
                         if (computerTotalValue > 21 && cIndexOfAce != -1) 
@@ -174,7 +183,7 @@ namespace ConsoleBlackjack
         private string FindWinner()
         {
             string results = string.Empty;
-            if(playerTotalValue > 21 && computerTotalValue <= 21) //afhverju telur gosi 11 ??
+            if(playerTotalValue > 21 && computerTotalValue <= 21) 
             {
                 results = ("\n  --- Computer Wins ---");
             }
@@ -201,12 +210,13 @@ namespace ConsoleBlackjack
             return results;
         }
 
-        public void ResetTable()
+        public void ResetTable()        //remember the reason for using a deck!! implement
         {
             table.playerCardString = string.Empty;
             table.computerCardString = string.Empty;
             table.displayString = string.Empty;
-            for (int i = 0; i < PlayerCardValueArray.Length; i++)
+            table.ResetCards();                         
+            for (int i = 0; i < PlayerCardValueArray.Length; i++)//have only one for loop going 10 times as the array size is fixed at 10
             {
                 PlayerCardValueArray[i] = 0;
             }

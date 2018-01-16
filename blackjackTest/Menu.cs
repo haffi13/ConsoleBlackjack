@@ -26,6 +26,7 @@ namespace ConsoleBlackjack
         public void StartGame()
         {
             controller.Decision();
+            MainMenu();
         }
         public int GetUserInput()
         {

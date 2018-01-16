@@ -9,15 +9,15 @@ namespace ConsoleBlackjack
     class Controller
     {
         Game game = new Game();
-        Program p = new Program();
+        //Program p = new Program();
         public void Decision()
         {
-            game.InitialPlay();
+            game.InitialPlay(1);
             bool running = true;
             while (running)
             {
                 Console.WriteLine("1 - Hit\n2 - Show");
-                int dec = Convert.ToInt32(Console.ReadLine());
+                int dec = Convert.ToInt32(Console.ReadLine());  //make this better!
 
                 switch (dec)
                 {
@@ -26,13 +26,14 @@ namespace ConsoleBlackjack
                         running = true;
                         break;
                     case 2:
+                        game.InitialPlay(2);
                         game.Hit(2);
                         Console.ReadKey();
                         game.ResetTable();
                         running = false;
                         Console.Clear();
-                        Menu m = new Menu();
-                        m.MainMenu();
+                        //Menu m = new Menu();
+                        //m.MainMenu();
                         break;
                     default:
                         Console.WriteLine("Selection is not valid");
