@@ -5,6 +5,7 @@ namespace ConsoleBlackjack
     class Controller
     {
         Game game = new Game();
+        int playerHitCount = 2;
 
         public void Decision()
         {
@@ -12,27 +13,40 @@ namespace ConsoleBlackjack
             bool running = true;
             while (running)
             {
-                Console.WriteLine("1 - Hit\n2 - Show");
+                //Console.WriteLine("1 - Hit\n2 - Show");
+                Display("1 - Hit\n2 - Show");
 
                 switch (GetUserInput())
                 {
                     case 1:
+                        playerHitCount++;
+                        if(playerHitCount > 11)
+                        {
+                            running = false;
+                            ComputersTurn();
+                        }
                         game.Hit(1);
                         running = true;
                         break;
                     case 2:
-                        game.InitialPlay(2);
-                        game.Hit(2);
-                        Console.ReadKey();
-                        game.ResetTable();
                         running = false;
-                        Console.Clear();
+                        ComputersTurn();
                         break;
                     default:
-                        Console.WriteLine("Selection is not valid");
+                        Display("Selection is not valid");
                         break;
                 }
             }
+        }
+
+        private void ComputersTurn()
+        {
+            playerHitCount = 0;
+            game.InitialPlay(2);
+            game.Hit(2);
+            Console.ReadKey();
+            game.ResetTable();
+            Console.Clear();
         }
 
         public int GetUserInput()
@@ -49,10 +63,15 @@ namespace ConsoleBlackjack
                 }
                 else
                 {
-                    Console.WriteLine("Selection is not valid.");
+                    Display("Selection is not valid");
                 }
             }
             return iInput;
+        }
+
+        public void Display(string message)
+        {
+            game.Display(message);
         }
     }
 }

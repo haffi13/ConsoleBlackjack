@@ -5,19 +5,26 @@ namespace ConsoleBlackjack
 {
     class Game
     {
+        //Have an option to choose the amount of card decks are used for the game
+        //keep score throughout the game
+        //terminate a game if the amount of cards isn't sufficient to finish the play with no-one getting a score for it
+        //make card counting assistant so you can keep track of the value, make the parameters user selectable.
+
         BlackjackTable table = new BlackjackTable();
 
         Random random = new Random();
         
         List<int> UnavailableCards = new List<int>();
-
+        
         int playerTotalValue = 0;
         int computerTotalValue = 0;
 
-        int[] PlayerCardValueArray = new int[10];
-        int[] PlayerCardType = new int[10];
-        int[] ComputerCardValueArray = new int[10];
-        int[] ComputerCardType = new int[10];
+        //put max card count one can draw to 12
+
+        int[] PlayerCardValueArray = new int[12];
+        int[] PlayerCardType = new int[12];
+        int[] ComputerCardValueArray = new int[12];
+        int[] ComputerCardType = new int[12];
         int playerHitCount = -1;
         int computerHitCount = -1;
 
@@ -29,14 +36,15 @@ namespace ConsoleBlackjack
         private int GetCardAttributes()
         {
             cardsDrawn++;
-            if(cardsDrawn > 51)
+            bool CardUnavailable = true;
+            int ranNum = 0;
+            int cardType = 0;
+            if (cardsDrawn > 51)
             {
                 Console.Clear();
                 Console.WriteLine("The deck is empty");
             }
-            bool CardUnavailable = true;
-            int ranNum = 0;
-            int cardType = 0;
+
             while (CardUnavailable)
             {
                 ranNum = random.Next(1, 53);
@@ -90,6 +98,7 @@ namespace ConsoleBlackjack
 
         public void InitialPlay(int playerOrComputer)
         {
+
             for (int i = 0; i < 2; i++)   
             {
                 Hit(playerOrComputer);
@@ -108,14 +117,14 @@ namespace ConsoleBlackjack
                     PlayerCardValueArray[playerHitCount] = currentValue;
                     playerTotalValue += currentValue;
                     table.AddCard(currentType, CardSort, playerOrComputer, playerHitCount);
-                    
+
                     int pIndexOfAce = Array.IndexOf(PlayerCardType, 1);
 
                     if (playerTotalValue > 21 && pIndexOfAce != -1)
                     {
                         playerTotalValue -= 10;
-                        PlayerCardType[pIndexOfAce] = 15;//some random value that is not being used otherwise
-                    }                                   //did this so the next time around it will not minus 10 again if the arguments are met
+                        PlayerCardType[pIndexOfAce] = 15;   //some random value that is not being used otherwise
+                    }                                       //did this so the next time around it will not minus 10 again if the arguments are met
                     break;
                 case 2:
                     
@@ -188,6 +197,11 @@ namespace ConsoleBlackjack
             computerHitCount = -1;
             playerTotalValue = 0;
             computerTotalValue = 0;
+        }
+
+        public void Display(string message)
+        {
+            table.Display(message);
         }
     }
 }

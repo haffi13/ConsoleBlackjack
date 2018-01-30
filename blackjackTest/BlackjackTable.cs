@@ -15,8 +15,8 @@ namespace ConsoleBlackjack
             {
                 case 1:
                     playerCardString = cards.GetCardString(cardType, cardSort, playerOrComputer, numOfCards);
-
-                    Display(playerCardString);
+                    
+                    Display(playerCardString, true);
                     break;
                 case 2:
                     computerCardString = cards.GetCardString(cardType, cardSort, playerOrComputer, numOfCards);
@@ -30,12 +30,22 @@ namespace ConsoleBlackjack
                             
                 "\n\n" + computerCardString + "\nComputer: " + computerTotal;
 
-            Display(display);
+            Display(display, true);
+            //Console.ReadKey();
+            //Console.Clear();
         }
 
-        private void Display(string message)
+        public void Display(string message, bool clear)
         {
-            Console.Clear();
+            if (clear)
+            {
+                Console.Clear();
+            }
+            Console.WriteLine(message);
+        }
+
+        public void Display(string message)//could also just pass false and only have the method with 2 parameters.
+        {
             Console.WriteLine(message);
         }
 
